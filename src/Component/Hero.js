@@ -164,7 +164,7 @@ const Carousel = () => {
                             <button class="button-86">Don,t Hesitate Take New Step</button>
                         </Link>
                     </div>
-                    <img className='absolute object-cover' src='https://www.hindustantimes.com/ht-img/img/2023/05/26/1600x900/-Pic-for-representation-_1685111948482.jpg' alt='pragnantLady'></img>
+                    <img className='absolute object-cover' src='https://www.hindustantimes.com/ht-img/img/2023/05/26/1600x900/-Pic-for-representation-_1685111948482.jpg' alt='pregnantLady'></img>
                 </div>
             </SwiperSlide>
 
