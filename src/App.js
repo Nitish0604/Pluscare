@@ -1,3 +1,4 @@
+// pages part
 import Home from './page/Home';
 import Blogs from './page/Blogs';
 import NoPage from './page/NoPage';
@@ -5,10 +6,16 @@ import Contact from './page/Contact';
 import Subscription from './page/Subscription';
 import DashBoard from './page/DashBoard';
 import Login from './page/Login';
-import { Route,Routes } from 'react-router-dom';
-import { useState } from 'react';
+import JoinDoctor from './page/JoinDoctor';
+
+// components part
 import Navbar from './Component/Navbar';
 import PrivateRoute from './Component/PrivateRoute';
+
+
+//react components
+import { Route,Routes } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -18,11 +25,12 @@ function App() {
     <div className="">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
        <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login />} />
           <Route path="subscription" element={<Subscription />} />
+          <Route path="joinDoctor" element={<JoinDoctor />} />
           <Route path="/dashboard" element = {
           <PrivateRoute isLoggedIn={isLoggedIn}>
               <DashBoard/>
