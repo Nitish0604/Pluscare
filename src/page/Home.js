@@ -1,8 +1,18 @@
 import React from 'react'
 
-const Home = () => {
+//components parts
+import Hero from '../Component/Hero';
+import About from '../Component/About';
+import StepPage from '../Component/StepPage';
+
+
+const Home = ({isLoggedIn,setIsLoggedIn}) => {
   return (
-    <div>Home</div>
+    <div>
+      <Hero/>
+      <About isLoggedIn={isLoggedIn}/>
+      <StepPage isLoggedIn={isLoggedIn}/>
+    </div>
   )
 }
 

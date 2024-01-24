@@ -2,21 +2,28 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from "../assets/logo192.png"
 import { toast } from "react-hot-toast"
-import { ImCross } from 'react-icons/im';
-import { useState } from 'react';
-import bgImg from "../assets/9094686.jpg"
+import "./Navbar.css";
+=======
+
 
 const Navbar = (props) => {
     let isLoggedIn = props.isLoggedIn;
     let setIsLoggedIn = props.setIsLoggedIn;
 
     return (
-            <div className='w-[100%] h-[60px] bg-darkGreen flex items-center justify-around fixed'>
+       <div className='w-100%] h-fit bg-darkGreen sticky top-0 z-[100] '>
+            <div className='w-[100%] max-w-[1600px]   min-h-[70px] bg-darkGreen flex flex-wrap items-center justify-around text-gray-200 mx-auto'>
+
+=======
                 {/* logo */}
                 <Link to="/" className='h-[60px] aspect-square'>
                     <img src={logo} alt="logo" className='h-[90%] aspect-square' />
                 </Link>
+
+              
+=======
                 <div className=' flex gap-[2rem] font-semibold text-[1.1rem]'>
+
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>
                     <NavLink to="/contact">Contact Us</NavLink>
@@ -24,15 +31,29 @@ const Navbar = (props) => {
                 {/* login subscription dashboard LogOut */}
                 <div className='flex items-center gap-x-4'>
                     {!isLoggedIn &&
+
+                        <Link to="/joinDoctor">
+                            <button className="button-55">
+                                Join As Doctor
+                            </button>
+                        </Link>
+                    }
+                    {!isLoggedIn &&
                         <Link to="/login">
-                            <button className="button-55" >
+                            <button className="button-55">
+=======
+                     
                                 Log In
                             </button>
                         </Link>
                     }
                     {!isLoggedIn &&
                         <Link to="/subscription">
-                            <button className='px-5 py-[.5rem] border-2 rounded-lg'  >
+<<<<<<
+                            <button className='px-5 py-[.5rem] border-2 rounded-lg'>
+=======
+                            
+>
                                 Subscription
                             </button>
                         </Link>
