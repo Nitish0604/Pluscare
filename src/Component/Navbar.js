@@ -9,8 +9,8 @@ const Navbar = (props) => {
     let setIsLoggedIn = props.setIsLoggedIn;
 
     return (
-        <div className='w-100%] h-fit bg-darkGreen '>
-            <div className='w-[100%] max-w-[1600px] sticky top-0 z-[100]  min-h-[70px] bg-darkGreen flex flex-wrap items-center justify-around text-gray-200 mx-auto'>
+        <div className='w-100%] h-fit bg-darkGreen sticky top-0 z-[100] '>
+            <div className='w-[100%] max-w-[1600px]   min-h-[70px] bg-darkGreen flex flex-wrap items-center justify-around text-gray-200 mx-auto'>
 
                 {/* logo */}
                 <Link to="/" className='h-[60px] aspect-square'>
