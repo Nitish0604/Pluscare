@@ -33,13 +33,13 @@ const Subcription = () => {
 
   return (
     <div className=' w-full h-screen mt-14 items-center flex justify-center  shadow-inner '>
-      <div className='w-[80vw] h-[116vh] bg-[rgba(103,168,233,0.82)] rounded-md flex justify-center items-center'>
+      <div className='w-[80vw] h-[116vh] bg-[#e2fcd6] rounded-md flex justify-center items-center'>
         <div className='w-[100%] h-[100%] flex flex-col gap-10'>
           <div className='flex '>
             <div className='text-4xl text-center font-semibold font-roboto pt-2 mx-auto'>Subscription</div>
           </div>
           <div className='w-[90%] h-[75%] mx-auto  bg-[#ffffff] rounded-md p-4  gap-4'>
-            <div className='flex h-[100%] bg-yellow-50'>
+            <div className='flex h-[100%] bg-[#f1f9ff]'>
 
               <form onSubmit={handleSubmit} className=" text-base grid grid-row-2 w-[100%] h-[100%] ">
                 <div className=' grid grid-rows-5 grid-cols-2 gap-1 w-[100%] h-[95%] p-2'>
@@ -133,7 +133,7 @@ const Subcription = () => {
                       type="text"
                       id="city"
                       name="city"
-                      value={formData.state}
+                      value={formData.city}
                       onChange={handleChange}
                       required
                     />
@@ -165,7 +165,7 @@ const Subcription = () => {
 
                 </div>
                 <div className='h-[15%] flex justify-center'>
-                  <button className='w-[137px] h-[42px] bg-[#EAB308] border rounded-md px-[19px] py-[10px] flex justify-center items-center text-[#ffffff] font-roboto font-semibold tracking-tighter' type="submit">Submit</button>
+                  <button className='w-[137px] h-[42px] bg-darkGreen border rounded-md px-[19px] py-[10px] flex justify-center items-center text-[#ffffff] font-roboto font-semibold tracking-tighter' type="submit">Submit</button>
                 </div>
 
               </form>
