@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import logo from "../assets/logo192.png"
+import logo from "../assets/logo2.png"
 import { toast } from "react-hot-toast"
 import "./Navbar.css";
 
@@ -13,8 +13,8 @@ const Navbar = (props) => {
             <div className='w-[100%] max-w-[1600px]   min-h-[70px] bg-darkGreen flex flex-wrap items-center justify-around text-gray-200 mx-auto'>
 
                 {/* logo */}
-                <Link to="/" className='h-[60px] aspect-square'>
-                    <img src={logo} alt="logo" className='h-[90%] aspect-square' />
+                <Link to="/" className='h-[70px]'>
+                    <img src={logo} alt="logo" className='h-[345%] top-[-120%] relative' />
                 </Link>
                 <div className=' flex gap-[2rem] font-semibold text-[1.2rem]'>
                     <NavLink to="/">Home</NavLink>
