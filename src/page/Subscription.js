@@ -43,10 +43,10 @@ const Subcription = () => {
 
               <form onSubmit={handleSubmit} className=" text-base grid grid-row-2 w-[100%] h-[100%] ">
                 <div className=' grid grid-rows-5 grid-cols-2 gap-1 w-[100%] h-[95%] p-2'>
-                  <div className='grid grid-col-2 '>
-                    <label className="flex items-center" htmlFor="name">Parent Name:</label>
+                  <div className='grid grid-col-2 w-[100%] '>
+                    <label className="flex items-center w-[80%]" htmlFor="name">Parent Name:</label>
                     <input
-                      className="rounded-xl shadow-md px-2"
+                      className="rounded-xl shadow-md px-2 w-[80%]"
                       type="text"
                       id="name"
                       name="name"
@@ -58,7 +58,7 @@ const Subcription = () => {
                   <div className='grid grid-rows-2 '>
                     <label className='flex items-center mt-1' htmlFor="email">Parent Email:</label>
                     <input
-                      className="rounded-xl shadow-md px-2"
+                      className="rounded-xl shadow-md px-2 w-[80%]"
                       type="email"
                       id="email"
                       name="email"
@@ -70,7 +70,7 @@ const Subcription = () => {
                   <div className='grid grid-rows-2 '>
                     <label className='flex items-center mt-1' htmlFor="childName">Child Name:</label>
                     <input
-                     className="rounded-xl shadow-md px-2"
+                     className="rounded-xl shadow-md px-2 w-[80%]"
                       type="text"
                       id="childName"
                       name="childName"
@@ -80,9 +80,21 @@ const Subcription = () => {
                     />
                   </div>
                   <div className='grid grid-rows-2 '>
+                    <label className='flex items-center mt-1' htmlFor="phoneNo">Phone Number:</label>
+                    <input
+                      className="rounded-xl shadow-md px-2 w-[80%]"
+                      type="tel"
+                      id="phoneNo"
+                      name="phoneNo"
+                      value={formData.phoneNo}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className='grid grid-rows-2 '>
                     <label className='flex items-center mt-1' htmlFor="childDob">Child Date of Birth:</label>
                     <input
-                      className="rounded-xl shadow-md px-2"
+                      className="rounded-xl shadow-md px-2 w-[80%]"
                       type="date"
                       id="childDob"
                       name="childDob"
@@ -93,7 +105,7 @@ const Subcription = () => {
                   </div>
                   <div className='grid grid-rows-2 '>
                         <label className='flex items-center mt-1' htmlFor='gender'>Gender</label>
-                        <select className="rounded-xl shadow-md px-2" name="gender" id='gender'  value={formData.gender} onChange={handleChange}>
+                        <select className="rounded-xl shadow-md px-2 w-[80%]" name="gender" id='gender'  value={formData.gender} onChange={handleChange}>
                           <option value="">Select Gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -101,18 +113,20 @@ const Subcription = () => {
                         </select>
                       
                     </div>
-                  <div className='grid grid-rows-2 '>
-                    <label className='flex items-center mt-1' htmlFor="phoneNo">Phone Number:</label>
-                    <input
+                
+
+                    <div className='grid grid-rows-2 '>
+                    <label className='flex items-center mt-1' htmlFor="address">Address:</label>
+                    <textarea
                       className="rounded-xl shadow-md px-2"
-                      type="tel"
-                      id="phoneNo"
-                      name="phoneNo"
-                      value={formData.phoneNo}
+                      id="address"
+                      name="address"
+                      value={formData.address}
                       onChange={handleChange}
                       required
                     />
                   </div>
+                  
                   <div className='grid grid-rows-2 '>
                     <label className='flex items-center mt-1' htmlFor="state">State:</label>
                     <input
@@ -151,17 +165,7 @@ const Subcription = () => {
                       required
                     />
                   </div>
-                  <div className='grid grid-rows-2 '>
-                    <label className='flex items-center mt-1' htmlFor="address">Address:</label>
-                    <textarea
-                      className="rounded-xl shadow-md px-2"
-                      id="address"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+                 
 
                 </div>
                 <div className='h-[15%] flex justify-center'>
