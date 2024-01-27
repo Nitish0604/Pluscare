@@ -43,7 +43,9 @@ const Login = (props) => {
             <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7892.jpg?w=740&t=st=1706198290~exp=1706198890~hmac=7739a023ef1292e394f617ca3040fa0bb0f05e7506bb5966dfef9671edf8f3c2" alt="Vector" className="w-[40%] aspect-square top-[109px] relative" />
             {/* Right Part */}
             <form onSubmit={submitHandler} className="flex flex-col justify-around bg-white w-[40%] h-[90%]  top-[50%] translate-y-[-50%] absolute right-0">
-                <img src={logo} alt="logo" className="mt-14 w-32  " />
+                <div className='relative flex flex-col items-center mb-[130px] w-full h-[60px]'>
+                    <img src={logo} alt='logo' className='h-[500%] w-fit mix-blend-multiply' />
+                </div>
                 <div className=' text-3xl text-center leading-10 font-semibold text-[#020617] -tracking-[2%]'>
                     Account Login
                 </div>
