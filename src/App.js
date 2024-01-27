@@ -14,7 +14,7 @@ import PrivateRoute from './Component/PrivateRoute';
 
 
 //react components
-import { Route,Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import './App.css';
 
@@ -23,21 +23,26 @@ function App() {
 
   return (
     <div className="relative">
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-       <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="login" element={<Login />} />
-          <Route path="subscription" element={<Subscription />} />
-          <Route path="joinDoctor" element={<JoinDoctor />} />
-          <Route path="/dashboard" element = {
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Routes>
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="subscription" element={<Subscription />} />
+        <Route path="joinDoctor" element={<JoinDoctor />} />
+        <Route path="/blogs" element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
-              <DashBoard/>
+            <Blogs />
           </PrivateRoute>
-       
+
         } />
-          <Route path="*" element={<NoPage />} />
+        <Route path="/dashboard" element={
+          <PrivateRoute isLoggedIn={isLoggedIn}>
+            <DashBoard />
+          </PrivateRoute>
+
+        } />
+        <Route path="*" element={<NoPage />} />
       </Routes>
     </div>
   );
