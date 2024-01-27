@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import logo from "../assets/logo2.png"
+import logo from "../assets/logo.png"
 import { toast } from "react-hot-toast"
 import "./Navbar.css";
 
@@ -9,12 +9,12 @@ const Navbar = (props) => {
     let setIsLoggedIn = props.setIsLoggedIn;
 
     return (
-        <div className='w-100%] h-fit bg-darkGreen sticky top-0 z-[100] '>
+        <div className='w-[100%] h-fit bg-darkGreen sticky top-0 z-[100] '>
             <div className='w-[100%] max-w-[1600px]   min-h-[70px] bg-darkGreen flex flex-wrap items-center justify-around text-gray-200 mx-auto'>
 
                 {/* logo */}
-                <Link to="/" className='h-[70px]'>
-                    <img src={logo} alt="logo" className='h-[345%] top-[-120%] relative' />
+                <Link to="/" className='h-[70px] overflow-hidden'>
+                    <img src={logo} alt="logo" className='h-[345%] top-[-120%] relative mix-blend-multiply' />
                 </Link>
                 <div className=' flex gap-[2rem] font-semibold text-[1.2rem]'>
                     <NavLink to="/">Home</NavLink>
