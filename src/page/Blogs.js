@@ -77,37 +77,37 @@ const Blogs = () => {
 
         <div className='w-[20%]  bg-white  '>
           
-          <button className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white 'onClick={Kid0} >
+          <button className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white 'onClick={Kid0} >
             Kids Teeth Care
           </button>
           
-            <button className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white ' onClick={Kid1}>
+            <button className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white ' onClick={Kid1}>
               Child care
             </button>
           
 
-          <button className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid2} >
+          <button className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid2} >
           Nutrition Tips For Kids
           </button>
-          <button className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid3}>
+          <button className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid3}>
           Causes of PCOS
           </button>
-          <button className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid4}>
+          <button className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'onClick={Kid4}>
           Mental Health Care 
           </button>
-          <div className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'>
+          <div className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'>
             Diarrhea
           </div>
-          <div className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'>
+          <div className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'>
             Diarrhea
           </div>
-          <div className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'>
+          <div className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'>
             Diarrhea
           </div>
-          <div className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'>
+          <div className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'>
             Diarrhea
           </div>
-          <div className='w-full h-[50px] bg-slate-100 flex items-center p-4 hover:bg-blue hover:text-white'>
+          <div className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white'>
             Diarrhea
           </div>
 
@@ -179,10 +179,10 @@ const Blogs = () => {
               </p>
               <h1 className='text-[1.2rem]  font-semibold mt-4 w-[65%]'> Below rules which will teach and support your kids in eating  healthy : </h1>
               <p>• Breakfast - Hard boiled eggs, toast, and an apple, Peanut butter on whole-grain toast.<br/>
-o Egg sandwich on whole-wheat bread.<br/>
-o Peanut butter on whole-grain toast.<br/>
-o Hard boiled eggs, toast, and an apple.<br/>
-o Yogurt
+                  o Egg sandwich on whole-wheat bread.<br/>
+                  o Peanut butter on whole-grain toast.<br/>
+                  o Hard boiled eggs, toast, and an apple.<br/>
+                  o Yogurt
               </p>
               <p>• Start the day with a protein rich breakfast – having a balanced and protein rich  breakfast help kids stay fuller longer.</p> <br/>
               <p>• Limit Sugar Intake – Sugar is a natural ingredient in many foods such as fruits, grains, vegetables and dairy products. Many foods also have added sugar which just add no calories to diet. As a side effect, it can cause hyperactivity, obesity, mood disorders and type 2 diabetes.</p>
@@ -230,11 +230,11 @@ o Yogurt
               <h1 className='text-[1.2rem]  font-semibold mt-4'> There are many factors which are detrimental to mental health: </h1>
               <p>
               1. Genetical Issues<br/>
-2. Trauma or Abuse<br/>
-3. Mental health issues in Family      
+              2. Trauma or Abuse<br/>
+              3. Mental health issues in Family        
               </p>
               <p>Identifying and treating mental health issues does not just improve our day-to-day activities or functioning but can also help us limit some of our physical health problems which are directly related to our mental health.<br/>
-In view of all this and as people are being more aware of their mental wellness, Psychiatry and Mental Health Care and Treatment has now become a very integral unit of any hospital.</p>
+              In view of all this and as people are being more aware of their mental wellness, Psychiatry and Mental Health Care and Treatment has now become a very integral unit of any hospital.</p>
 
 
             </div>
