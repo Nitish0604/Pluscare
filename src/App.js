@@ -30,17 +30,11 @@ function App() {
         <Route path="login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />
-        <Route path="/blogs" element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <Blogs />
-          </PrivateRoute>
-
-        } />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/dashboard" element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
             <DashBoard />
           </PrivateRoute>
-
         } />
         <Route path="*" element={<NoPage />} />
       </Routes>
