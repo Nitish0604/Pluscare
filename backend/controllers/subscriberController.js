@@ -1,11 +1,11 @@
-const Subscriber = require("../models/subscriptionModel");
+const Subscriber = require("../models/subscriberModel");
 const bcrypt = require("bcrypt");
 const otpGenerator = require('otp-generator');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const mailSender = require('../util/mailSender');
 const {subscriptionEmail} = require("../mailTemplate/subscriptionEmail");
 
-const subscription = async (req, res) => {
+const newSubscriber = async (req, res) => {
     try {
         const { guardianName, childName, dob, gender, email, contact, address, dist, state, pin } = req.body;
 
@@ -53,68 +53,6 @@ const subscription = async (req, res) => {
 }
 
 
-
-
-const logIn = async(req,res) => {
-    try{
-        const {email,password} = req.body;
-        if(!email || !password){
-            return res.status(400).json({
-                success:false,
-                message:"plz fill all the blockes",
-            });
-        }
-
-        let user = await Subscriber.findOne({email});
-        if(!user){
-            return res.status(401).json({
-                success:false,
-                message:"user is not registered",
-            });
-        }
-
-        const payload = {
-            email:user.email,
-            id:user._id,
-        };
-
-        if(await bcrypt.compare(password,user.password)){
-            let token = jwt.sign(payload,process.env.JWT_SECRET); 
-        
-        user = user.toObject();
-        user.token = token;
-        user.password = undefined;
-
-        const option = {
-            expires: new Date(Date.now() + 3*24*60*60*1000),
-            httpOnly:true,
-        };
-        
-        res.status(200).json({
-            success:true,
-            user,
-            token,
-            message:"login succesfull",
-        });
-
-        }
-        else{
-            res.status(403).json({
-                success:false,
-                messaage:"password Incorrect",
-            });
-        }
-
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({
-            success:false,
-            message:"login failed",
-        });
-    }
-}
-
-
 const getAllSubscriber = async(req,res) => {
     try{
 
@@ -134,4 +72,59 @@ const getAllSubscriber = async(req,res) => {
     }
 }
 
-module.exports={ getAllSubscriber ,logIn , subscription}
+
+// const logIn = async(req,res) => {
+//     try{
+//         const {email,password} = req.body;
+//         if(!email || !password){
+//             return res.status(400).json({
+//                 success:false,
+//                 message:"plz fill all the blockes",
+//             });
+//         }
+
+//         let user = await Subscriber.findOne({email});
+//         if(!user){
+//             return res.status(401).json({
+//                 success:false,
+//                 message:"user is not registered",
+//             });
+//         }
+
+//         const payload = {
+//             email:user.email,
+//             id:user._id,
+//         };
+
+//         if(await bcrypt.compare(password,user.password)){
+//             let token = jwt.sign(payload,process.env.JWT_SECRET); 
+        
+//         user = user.toObject();
+//         user.token = token;
+//         user.password = undefined;
+        
+//         res.status(200).json({
+//             success:true,
+//             user,
+//             token,
+//             message:"login succesfull",
+//         });
+
+//         }
+//         else{
+//             res.status(403).json({
+//                 success:false,
+//                 messaage:"password Incorrect",
+//             });
+//         }
+
+//     } catch(err) {
+//         console.error(err);
+//         res.status(500).json({
+//             success:false,
+//             message:"login failed",
+//         });
+//     }
+// }
+
+module.exports={ getAllSubscriber , newSubscriber};

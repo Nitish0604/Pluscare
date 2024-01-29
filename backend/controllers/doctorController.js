@@ -1,6 +1,6 @@
 const Doctor = require("../models/doctorModel");
 
-exports.postDoctor = async(req,res) => {
+exports.newDoctor = async(req,res) => {
     try{
         const {name,email,contact,qualification,gender,address,description} = req.body;
 

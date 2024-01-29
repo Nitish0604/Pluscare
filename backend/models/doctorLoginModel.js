@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const loginSchema = new mongoose.Schema({
+const doctorLoginSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -12,8 +12,8 @@ const loginSchema = new mongoose.Schema({
     },
     additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Subscriber",
+        ref: "Doctor",
     }
 });
 
-module.exports = mongoose.model("Login",loginSchema);
+module.exports = mongoose.model("DoctorLogin",doctorLoginSchema);

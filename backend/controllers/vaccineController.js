@@ -1,5 +1,5 @@
 const Vaccine = require("../models/vaccineModel");
-const Subscriber = require("../models/subscriptionModel");
+const Subscriber = require("../models/subscriberModel");
 
 exports.vaccination = async(req,res) => {
     try{

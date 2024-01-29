@@ -54,6 +54,10 @@ const subscriberSchema = new mongoose.Schema({
     vaccines: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Vaccine",
+    }],
+    packages: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Package",
     }]
 });
 
