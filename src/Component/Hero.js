@@ -113,7 +113,7 @@ const Carousel = () => {
                             <button className="button-88">Secure Your Health Today</button>
                         </Link>
                     </div>
-                    <img className='absolute object-cover' src='https://img.freepik.com/free-photo/patient-getting-covid-19-test_23-2148813495.jpg?w=1380&t=st=1706085555~exp=1706086155~hmac=b3449a0f6fc01d1216a5d03d688989939d7573d9e753c8c70f17a3dc5be00349'
+                    <img className='absolute object-cover' src='https://img.freepik.com/free-photo/serious-mature-man-having-consultations-with-his-doctor-who-is-showing-him-medical-test-analysis-digital-tablet_637285-1465.jpg?w=1060&t=st=1706635969~exp=1706636569~hmac=8a38baef404968ae4754726dc7a0eaac79569edf1e5d44a86b6a4d4923f6c37f'
                         alt='oldPeople'></img>
                 </div>
             </SwiperSlide>
