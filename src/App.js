@@ -7,6 +7,7 @@ import Subscription from './page/Subscription';
 import DashBoard from './page/DashBoard';
 import Login from './page/Login';
 import JoinDoctor from './page/JoinDoctor';
+import Symptoms from './page/Symptoms'
 
 // components part
 import Navbar from './Component/Navbar';
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="symptoms" element={<Symptoms />} />
         <Route path="login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />

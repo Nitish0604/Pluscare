@@ -20,6 +20,7 @@ const Navbar = (props) => {
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>
                     <NavLink to="/contact">Contact Us</NavLink>
+                    <NavLink to="/symptoms">Check Symptoms</NavLink>
                 </div>
                 {/* login subscription dashboard LogOut */}
                 <div className='flex items-center gap-x-4'>
