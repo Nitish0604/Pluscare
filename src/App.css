@@ -1,0 +1,3 @@
+.dashboardScroll::-webkit-scrollbar {
+    display: none;
+  }

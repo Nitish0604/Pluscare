@@ -11,7 +11,7 @@ import Symptoms from './page/Symptoms'
 
 // components part
 import Navbar from './Component/Navbar';
-import PrivateRoute from './Component/PrivateRoute';
+// import PrivateRoute from './Component/PrivateRoute';
 
 
 //react components
@@ -27,7 +27,6 @@ function App() {
   return (
     <div className="relative">
       {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
-      {/* <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="contact" element={<Contact />} />
@@ -37,10 +36,7 @@ function App() {
         <Route path="joinDoctor" element={<JoinDoctor />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/dashboard" element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <DashBoard />
-          </PrivateRoute>
-        } />
+            <DashBoard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </div>
