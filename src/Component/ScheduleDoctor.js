@@ -12,10 +12,10 @@ const ScheduleDoctor = () => {
                 <div className=" w-[60%] flex flex-col-reverse items-center md:flex-row gap-[2rem] justify-center mx-auto mt-[2rem] ">
                     
                         <Link to='/contact' className="">
-                            <span className="text-center capitalize px-4 py-3  bg-lightBlue rounded-md font-semibold">Book in person appointment</span>
+                            <span className="text-center capitalize px-4 py-3 text-nowrap  bg-lightBlue rounded-md font-semibold">Book in person appointment</span>
                         </Link>
                         <Link target='_blank' to='https://www.videosdk.live/prebuilt/demo'>
-                            <span className="text-center px-6 py-3 bg-lightBlue rounded-md capitalize font-semibold">Book virtual appointment</span>
+                            <span className="text-center px-6 py-3 bg-lightBlue rounded-md text-nowrap capitalize font-semibold">Book virtual appointment</span>
                         </Link>
                 </div>
             </div>
