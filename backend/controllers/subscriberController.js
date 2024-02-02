@@ -1,7 +1,6 @@
 const Subscriber = require("../models/subscriberModel");
 const bcrypt = require("bcrypt");
 const otpGenerator = require('otp-generator');
-//const jwt = require('jsonwebtoken');
 const mailSender = require('../util/mailSender');
 const {subscriptionEmail} = require("../mailTemplate/subscriptionEmail");
 
@@ -57,7 +56,15 @@ const getAllSubscriber = async(req,res) => {
     try{
 
         const Subscribers = await Subscriber.find()
-        .populate("vaccines").exec();
+        .populate(
+            {
+                path: "vaccines",
+                populate:{
+                    path: "doctor",
+                    select: '_id name',
+                },
+            }
+        ).exec();
 
         res.json({
             Subscribers,

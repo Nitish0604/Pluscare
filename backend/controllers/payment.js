@@ -133,7 +133,7 @@ exportds.verifySignature = async (req,res) => {
             const emailResponse = await mailSender(
                         buyerUser.email,
                         "Congratulations from PlusCare",
-                        "Congratulations,you r now member of plusCare",
+                        "Congratulations,you are now member of plusCare",
             );
 
             console.log(emailResponse);

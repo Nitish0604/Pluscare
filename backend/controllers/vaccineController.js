@@ -1,16 +1,18 @@
 const Vaccine = require("../models/vaccineModel");
 const Subscriber = require("../models/subscriberModel");
+const Doctor = require("../models/doctorModel");
 
 exports.vaccination = async(req,res) => {
     try{
-        const {patient,user,vaccineName} = req.body;
+        const doctorId = req.user.id;
+        const doctorDetails = await Doctor.findById(doctorId);
+
+        const {patient,vaccineName} = req.body;
         const vaccine = new Vaccine({
-            patient,user,vaccineName
+            patient,doctor:doctorDetails._id,vaccineName
         });
 
-        console.log(vaccine);
         const savedvaccine = await vaccine.save();
-        console.log(savedvaccine);
 
         const updatedPatient = await Subscriber.findByIdAndUpdate(patient,{$push: {vaccines: savedvaccine._id}}, {new: true})
                             .populate("vaccines")
