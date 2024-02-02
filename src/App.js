@@ -7,41 +7,40 @@ import Subscription from './page/Subscription';
 import DashBoard from './page/DashBoard';
 import Login from './page/Login';
 import JoinDoctor from './page/JoinDoctor';
+import Symptoms from './page/Symptoms'
+import AdminDashboard from './page/AdminDashboard';
 
 // components part
 import Navbar from './Component/Navbar';
-import PrivateRoute from './Component/PrivateRoute';
+// import PrivateRoute from './Component/PrivateRoute';
 
 
 //react components
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const excludedPaths = ['/dashboard','/AdminDashboard'];
+  const location = useLocation();
   return (
     <div className="relative">
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="symptoms" element={<Symptoms />} />
         <Route path="login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />
-        <Route path="/blogs" element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <Blogs />
-          </PrivateRoute>
-
-        } />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard setIsLoggedIn={setIsLoggedIn}
+        setIsMenuOpen={setIsMenuOpen}/>} />
         <Route path="/dashboard" element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <DashBoard />
-          </PrivateRoute>
-
-        } />
+            <DashBoard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </div>

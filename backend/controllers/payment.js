@@ -1,10 +1,15 @@
-const {instance} = require("../config/razorpay");
+//const {instance} = require("../config/razorpay");
 const Package = require("../models/packageModel");
 const Subscriber = require("../models/subscriberModel");
 const mailSender = require("../util/mailSender");
+const Razorpay = require("razorpay")
 
 
-//capture the payment and initiate the razorpay order
+const razorpay = new Razorpay({
+    key_id: "rzp_test_j3uMC3pJNVXJpR",
+    key_secret: "iVdd7vf9Qopo1TKflmLWF8Ue",
+  });
+  
 exports.capturePayment = async(req,res) => {
     //get packageId and userId 
     const {package_id,userId} = req.body;
@@ -33,7 +38,7 @@ exports.capturePayment = async(req,res) => {
         if(package.buyerId.includes(uid)){
             return res.status(200).json({
                 success: false,
-                message: "user is already buy this package ",
+                message: "user is already buy this package",
             });
         }
     }
@@ -60,8 +65,8 @@ exports.capturePayment = async(req,res) => {
     };
 
     try{
-        //initiate the payment using razorpay
-        const paymantResponse = await instance.orders.create(options);
+       
+        const paymantResponse = await razorpay.orders.create(options);
         console.log(paymentResponse);
         return res.status(200).json({
              success: true,
@@ -84,7 +89,7 @@ exports.capturePayment = async(req,res) => {
 
 //verify Signature of Razorpay and server
 
-exportds.verifySignature = async (req,res) => {
+exports.verifySignature = async (req,res) => {
     const webhookSecret = "12345678";
 
     const signature = req.headers("x-razorpay-signature");

@@ -37,12 +37,13 @@ const Login = (props) => {
         navigate("/dashboard");
     }
     return (
-        <div className="relative w-[90%] h-fit">
+        <div className="relative w-[90%] flex md:flex-row flex-col justify-between items-center h-fit">
             {/* Left Part */}
 
-            <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7892.jpg?w=740&t=st=1706198290~exp=1706198890~hmac=7739a023ef1292e394f617ca3040fa0bb0f05e7506bb5966dfef9671edf8f3c2" alt="Vector" className="w-[40%] aspect-square top-[109px] relative" />
+            <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7892.jpg?w=740&t=st=1706198290~exp=1706198890~hmac=7739a023ef1292e394f617ca3040fa0bb0f05e7506bb5966dfef9671edf8f3c2" alt="Vector" className="w-[80%] md:w-[40%] aspect-square" />
+            
             {/* Right Part */}
-            <form onSubmit={submitHandler} className="flex flex-col justify-around bg-white w-[40%] h-[90%]  top-[50%] translate-y-[-50%] absolute right-0">
+            <form onSubmit={submitHandler} className="mb-4 flex flex-col justify-around items-center bg-white md:w-[40%] h-[90%]">
                 <div className='relative flex flex-col items-center mb-[130px] w-full h-[60px]'>
                     <img src={logo} alt='logo' className='h-[500%] w-fit mix-blend-multiply' />
                 </div>
@@ -52,12 +53,12 @@ const Login = (props) => {
                 <div className='font-normal  text-center text-[#020617]  w-[90%] -tracking-[2%]'>
                     If you are Id & Password you can login with your email address and password.
                 </div>
-                <div className='flex flex-col w-[100%] ml-3'>
+                <div className='flex flex-col items-center w-[100%] '>
                     <label
-                        className=''
+                        className='w-full py-[.5rem]'
                         htmlFor='email'>
                         <p
-                            className='text-xl font-medium  text-[#020617] mb-3'
+                            className='text-xl font-medium  text-[#020617] pl-[3rem]'
                         >Email address
                         </p>
                     </label>
@@ -71,13 +72,13 @@ const Login = (props) => {
                         required
                     />
                 </div>
-                <div className='flex flex-col w-[100%] ml-3'>
+                <div className='flex items-center flex-col w-[100%] relative'>
                     <label
-                        className=''
+                        className='w-full py-[.5rem]'
                         htmlFor='password'>
                         <p
-                            className='text-xl font-medium text-[#020617] mb-3'
-                        >Password
+                            className='text-xl font-medium text-[#020617] pl-[3rem]'
+                        >Password:
                         </p>
                     </label>
                     <input

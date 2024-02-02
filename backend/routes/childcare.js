@@ -7,6 +7,7 @@ const {userLogIn,doctorLogIn} = require("../controllers/loginController")
 const {vaccination} = require("../controllers/vaccineController");
 const {newDoctor,getAllDoctor} = require("../controllers/doctorController");
 const {newPackage,getAllPackage} = require("../controllers/packageController");
+const {capturePayment,verifySignature} = require("../controllers/payment");
 
 
 router.post("/newSubscriber",newSubscriber);
@@ -18,6 +19,9 @@ router.post("/newPackage",auth,newPackage);
 router.get("/allSubscriber",getAllSubscriber);
 router.get("/allDoctors",getAllDoctor);
 router.get("/allPackages",getAllPackage);
+router.post("/initializePayment",capturePayment);
+router.post("/verifyPayment",verifySignature);
+
 
 
 module.exports = router;

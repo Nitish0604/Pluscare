@@ -3,10 +3,11 @@ import { useState } from 'react';
 import logo from "../assets/logo.png"
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 const Subscription = () => {
 
   const navigate = useNavigate();
-  const [visible,setVisible] =useState(false);
+  const [visible, setVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +18,7 @@ const Subscription = () => {
     address: '',
     city: '',
     state: '',
-    pincode: '',
+    pincode: ''
   });
 
   const handleChange = (e) => {
@@ -34,10 +35,78 @@ const Subscription = () => {
     setVisible(true);
   };
 
-  function clickHandler(){
-    toast.success("successfully Purchased!");
-    navigate("/");
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      }
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
   }
+
+  // function clickHandler(){
+  //   // toast.success("successfully Purchased!");
+  //   // navigate("/");
+
+  // }
+
+  // const clickHandler = (e) => {
+  //   e.preventDefault();
+  //   if (inputValue.trim()) {
+  //     // socket.emit("chat message", inputValue);
+  //     setInputValue("");
+  //   }
+  // };
+
+  const clickHandler = async (e) => {
+    e.preventDefault();
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/initializePayment"
+    );
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/api/PlusCare/Home/payment/razorpay",
+        { amount: 500 }
+      );
+      const options = {
+        key: "rzp_test_j3uMC3pJNVXJpR",
+        amount: data.amount,
+        currency: data.currency,
+        name: "Service",
+        description: "Test Transaction",
+        order_id: data.id,
+        handler: async (response) => {
+          try {
+            const verifyUrl = "http://localhost:4000/api/PlusCare/Home/payment/verifyPayment";
+            const { data } = await axios.post(verifyUrl, {
+              ...response,
+              // sid,
+              // tid,
+            });
+            console.log(data);
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   return (
     <div className=' w-full h-fit'>
 
@@ -198,24 +267,24 @@ const Subscription = () => {
         </div>
       </div>
 
-    {/* subscription */}
-    {
-      visible && 
-      <div className='w-[60%] mx-auto mb-[2rem] flex-col flex gap-[1rem]'>
-      <p className='text-[2.5rem] uppercase text-center font-semibold  pt-2 mx-auto mb-[2rem]'>Your <span className='text-darkGreen'>Subscription's</span> Details</p>
-      <div className='flex justify-between'>
-        <p className='text-darkGreen text-[1.4rem]'>ParentName:<span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.name}</span></p>
-        <p className='text-darkGreen text-[1.4rem]'>ChildName:
-        <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.childName}</span></p>
-      </div>
-      <p className='text-darkGreen text-[1.4rem]'>Your Email:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.email}</span></p>
-      <p className='text-darkGreen text-[1.4rem]'>Phone No:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.phoneNo}</span></p>
-      <p className='text-darkGreen text-[1.4rem]'>Your Total Amount: <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>₹2000/-</span></p>
-      <button onClick={clickHandler} className='bg-blue w-[40%] h-[50px] text-white rounded-xl relative left-[50%] translate-x-[-50%] 
+      {/* subscription */}
+      {
+        visible &&
+        <div className='w-[60%] mx-auto mb-[2rem] flex-col flex gap-[1rem]'>
+          <p className='text-[2.5rem] uppercase text-center font-semibold  pt-2 mx-auto mb-[2rem]'>Your <span className='text-darkGreen'>Subscription's</span> Details</p>
+          <div className='flex justify-between'>
+            <p className='text-darkGreen text-[1.4rem]'>ParentName:<span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.name}</span></p>
+            <p className='text-darkGreen text-[1.4rem]'>ChildName:
+              <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.childName}</span></p>
+          </div>
+          <p className='text-darkGreen text-[1.4rem]'>Your Email:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.email}</span></p>
+          <p className='text-darkGreen text-[1.4rem]'>Phone No:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.phoneNo}</span></p>
+          <p className='text-darkGreen text-[1.4rem]'>Your Total Amount: <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>₹2000/-</span></p>
+          <button onClick={clickHandler} className='bg-blue w-[40%] h-[50px] text-white rounded-xl relative left-[50%] translate-x-[-50%] 
       mt-[1rem]'>Purchase</button>
-    </div>
-    }
-      
+        </div>
+      }
+
 
     </div>
 
