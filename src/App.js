@@ -8,6 +8,7 @@ import DashBoard from './page/DashBoard';
 import Login from './page/Login';
 import JoinDoctor from './page/JoinDoctor';
 import Symptoms from './page/Symptoms'
+import AdminDashboard from './page/AdminDashboard';
 
 // components part
 import Navbar from './Component/Navbar';
@@ -21,12 +22,13 @@ import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const excludedPaths = ['/dashboard','/adminDashboard'];
+  const excludedPaths = ['/dashboard','/AdminDashboard'];
   const location = useLocation();
   return (
     <div className="relative">
-      {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+      {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="contact" element={<Contact />} />
@@ -35,6 +37,8 @@ function App() {
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard setIsLoggedIn={setIsLoggedIn}
+        setIsMenuOpen={setIsMenuOpen}/>} />
         <Route path="/dashboard" element={
             <DashBoard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />

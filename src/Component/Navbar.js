@@ -8,7 +8,8 @@ import "./Navbar.css";
 const Navbar = (props) => {
     let isLoggedIn = props.isLoggedIn;
     let setIsLoggedIn = props.setIsLoggedIn;
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    let isMenuOpen = props.isMenuOpen;
+    let setIsMenuOpen = props.setIsMenuOpen;
     const [isSizeOpen, setIsSizeOpen] = useState(false);
     
     const handleResize = () => {
