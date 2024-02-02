@@ -1,6 +1,7 @@
 const Subscriber = require("../models/subscriberModel");
 const Doctor = require("../models/doctorModel");
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 
 const userLogIn = async(req,res) => {
     try{
@@ -26,7 +27,9 @@ const userLogIn = async(req,res) => {
         };
 
         if(await bcrypt.compare(password,user.password)){
-            let token = jwt.sign(payload,process.env.JWT_SECRET); 
+            let token = jwt.sign(payload,process.env.JWT_SECRET,{
+                                    expiresIn:"30d",
+                                }); 
         
         user = user.toObject();
         user.token = token;
@@ -77,11 +80,13 @@ const doctorLogIn = async(req,res) => {
 
         const payload = {
             email:doctor.email,
-            id:user._id,
+            id:doctor._id,
         };
 
         if(await bcrypt.compare(password,doctor.password)){
-            let token = jwt.sign(payload,process.env.JWT_SECRET); 
+            let token = jwt.sign(payload,process.env.JWT_SECRET,{
+                                    expiresIn:"30d",
+                                }); 
         
         doctor = doctor.toObject();
         doctor.token = token;

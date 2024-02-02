@@ -1,4 +1,4 @@
-exports.subscriptionEmail = (email,otp) => {
+exports.doctorSignUpEmail = () => {
     return `<!DOCTYPE html>
   <html>
   
@@ -70,8 +70,16 @@ exports.subscriptionEmail = (email,otp) => {
       <div class="message">Welcome to the PlusCare</div>
       <div class="body">
         
-        <p>Welcome to PlusCare family</p><br/>
-        <p>Here are your login details:<br/>Username :  ${email} <br/>Password: ${otp}</p>
+        <p>I hope this email finds you well. I am reaching out regarding 
+             a recent registration process that you initiated.</p><br/>
+
+        <p>I wanted to inform you that as part of our security measures, 
+            a verification process is required to complete your registration.
+            This process ensures the safety and integrity of our platform.</p><br/>
+        
+        <p>I understand that you may be eager to proceed, but kindly request your patience 
+            as we finalize the verification process. Rest assured, we are working diligently 
+            to expedite this procedure. You should receive a verification email shortly.</p><br/>
       
       </div>
       <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a

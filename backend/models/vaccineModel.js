@@ -5,9 +5,10 @@ const vaccineSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Subsriber",
     },
-    user:{
-        type: String,
-        required:true,
+    doctor:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Doctor",
     },
     vaccineName:{
         type: String,
