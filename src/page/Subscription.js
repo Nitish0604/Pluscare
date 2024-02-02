@@ -7,18 +7,17 @@ import axios from 'axios';
 const Subscription = () => {
 
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    guardianName: '',
     email: '',
     childName: '',
-    childDob: '',
+    dob: '',
     gender: '',
-    phoneNo: '',
+    contact: '',
     address: '',
-    city: '',
+    dist: '',
     state: '',
-    pincode: ''
+    pin: ''
   });
 
   const handleChange = (e) => {
@@ -29,83 +28,34 @@ const Subscription = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setVisible(true);
-  };
-
-  function loadScript(src) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      }
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
-
-  // function clickHandler(){
-  //   // toast.success("successfully Purchased!");
-  //   // navigate("/");
-
-  // }
-
-  // const clickHandler = (e) => {
-  //   e.preventDefault();
-  //   if (inputValue.trim()) {
-  //     // socket.emit("chat message", inputValue);
-  //     setInputValue("");
-  //   }
-  // };
-
-  const clickHandler = async (e) => {
-    e.preventDefault();
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/initializePayment"
-    );
-
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/PlusCare/Home/payment/razorpay",
-        { amount: 500 }
-      );
-      const options = {
-        key: "rzp_test_j3uMC3pJNVXJpR",
-        amount: data.amount,
-        currency: data.currency,
-        name: "Service",
-        description: "Test Transaction",
-        order_id: data.id,
-        handler: async (response) => {
-          try {
-            const verifyUrl = "http://localhost:4000/api/PlusCare/Home/payment/verifyPayment";
-            const { data } = await axios.post(verifyUrl, {
-              ...response,
-              // sid,
-              // tid,
-            });
-            console.log(data);
-          } catch (error) {
-            console.log(error);
-          }
-        },
-        theme: {
-          color: "#3399cc",
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
         },
       };
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+      const data = await axios.post(
+        "http://localhost:4000/api/PlusCare/Home/newSubscriber",
+        formData
+        ,
+        config
+      );
+      console.log(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
 
+      navigate("/");
     } catch (error) {
-      console.log(error);
-    }
 
+
+    }
   };
+
+
+
+
 
   return (
     <div className=' w-full h-fit'>
@@ -124,13 +74,13 @@ const Subscription = () => {
               {/* parent and child name */}
               <div className='flex md:flex-row flex-col justify-between'>
                 <div className='md:w-[40%] flex flex-col'>
-                  <label className="mb-2 font-semibold text-[1.1rem]" htmlFor="name">Parent Name:</label>
+                  <label className="mb-2 font-semibold text-[1.1rem]" htmlFor="guardianName">Parent Name:</label>
                   <input
                     className="border-b-2 border-b-darkGreen w-[100%] h-[50px] p-2"
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="guardianName"
+                    name="guardianName"
+                    value={formData.guardianName}
                     onChange={handleChange}
                     required
                   />
@@ -164,13 +114,13 @@ const Subscription = () => {
 
                 </div>
                 <div className='md:w-[20%] flex flex-col'>
-                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="childDob">Child's DoB:</label>
+                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="dob">Child's DoB:</label>
                   <input
                     className="border-b-2 border-b-darkGreen w-full  h-[50px] p-2"
                     type="date"
-                    id="childDob"
-                    name="childDob"
-                    value={formData.childDob}
+                    id="dob"
+                    name="dob"
+                    value={formData.dob}
                     onChange={handleChange}
                     required
                   />
@@ -187,15 +137,14 @@ const Subscription = () => {
               </div>
               {/* phoneNo */}
               <div className=''>
-                <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="phoneNo">Phone Number:</label>
+                <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="contact">Phone Number:</label>
                 <input
                   className="border-b-2 border-b-darkGreen w-full  h-[50px] p-2"
                   type="number"
-                  id="phoneNo"
-                  name="phoneNo"
+                  id="contact"
+                  name="contact"
                   placeholder='Enter Your Phone No'
-                  min="0"
-                  value={formData.phoneNo}
+                  value={formData.contact}
                   onChange={handleChange}
                   required
                 />
@@ -208,6 +157,7 @@ const Subscription = () => {
                   id="address"
                   name="address"
                   maxLength="200"
+                  type='text'
                   value={formData.address}
                   onChange={handleChange}
                   required
@@ -229,35 +179,33 @@ const Subscription = () => {
                 </div>
 
                 <div className='w-[30%] flex flex-col '>
-                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="city">City:</label>
+                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="dist">City:</label>
                   <input
                     className="border-b-2 border-b-darkGreen w-full  h-[50px] p-2"
                     type="text"
-                    id="city"
-                    name="city"
-                    value={formData.city}
+                    id="dist"
+                    name="dist"
+                    value={formData.dist}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
                 <div className='w-[30%] flex flex-col '>
-                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="pincode">Pincode:</label>
+                  <label className='mb-2 font-semibold text-[1.1rem]' htmlFor="pin">Pincode:</label>
                   <input
                     className="border-b-2 border-b-darkGreen w-full  h-[50px] p-2"
-                    type="text"
-                    id="pincode"
-                    name="pincode"
-                    maxLength="6"
-                    pattern="[0-9]{6}"
-                    value={formData.pincode}
+                    type="number"
+                    id="pin"
+                    name="pin"
+                    value={formData.pin}
                     onChange={handleChange}
                     required
                   />
                 </div>
               </div>
               <div className='h-[15%] flex justify-center'>
-                <button className='w-[137px] h-[42px] bg-darkGreen border rounded-md px-[19px] py-[10px] flex justify-center items-center text-[#ffffff] font-roboto font-semibold tracking-tighter' type="submit">Submit</button>
+                <button className='w-[137px] h-[42px] bg-darkGreen border rounded-md px-[19px] py-[10px] flex justify-center items-center text-[#ffffff] font-roboto font-semibold tracking-tighter'>Submit</button>
               </div>
             </form>
           </div>
@@ -268,21 +216,24 @@ const Subscription = () => {
       </div>
 
       {/* subscription */}
+
+
+
       {
-        visible &&
-        <div className='w-[60%] mx-auto mb-[2rem] flex-col flex gap-[1rem]'>
-          <p className='text-[2.5rem] uppercase text-center font-semibold  pt-2 mx-auto mb-[2rem]'>Your <span className='text-darkGreen'>Subscription's</span> Details</p>
-          <div className='flex justify-between'>
-            <p className='text-darkGreen text-[1.4rem]'>ParentName:<span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.name}</span></p>
-            <p className='text-darkGreen text-[1.4rem]'>ChildName:
-              <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.childName}</span></p>
-          </div>
-          <p className='text-darkGreen text-[1.4rem]'>Your Email:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.email}</span></p>
-          <p className='text-darkGreen text-[1.4rem]'>Phone No:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.phoneNo}</span></p>
-          <p className='text-darkGreen text-[1.4rem]'>Your Total Amount: <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>₹2000/-</span></p>
-          <button onClick={clickHandler} className='bg-blue w-[40%] h-[50px] text-white rounded-xl relative left-[50%] translate-x-[-50%] 
-      mt-[1rem]'>Purchase</button>
-        </div>
+        // visible &&
+        //   <div className='w-[60%] mx-auto mb-[2rem] flex-col flex gap-[1rem]'>
+        //     <p className='text-[2.5rem] uppercase text-center font-semibold  pt-2 mx-auto mb-[2rem]'>Your <span className='text-darkGreen'>Subscription's</span> Details</p>
+        //     <div className='flex justify-between'>
+        //       <p className='text-darkGreen text-[1.4rem]'>ParentName:<span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.name}</span></p>
+        //       <p className='text-darkGreen text-[1.4rem]'>ChildName:
+        //         <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.childName}</span></p>
+        //     </div>
+        //     <p className='text-darkGreen text-[1.4rem]'>Your Email:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.email}</span></p>
+        //     <p className='text-darkGreen text-[1.4rem]'>Phone No:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.phoneNo}</span></p>
+        //     <p className='text-darkGreen text-[1.4rem]'>Your Total Amount: <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>₹2000/-</span></p>
+        //     <button onClick={clickHandler} className='bg-blue w-[40%] h-[50px] text-white rounded-xl relative left-[50%] translate-x-[-50%] 
+        // mt-[1rem]'>Purchase</button>
+        //   </div>
       }
 
 

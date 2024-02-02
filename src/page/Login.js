@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-
+import axios from 'axios';
 
 const Login = (props) => {
 
@@ -28,14 +28,39 @@ const Login = (props) => {
     function resetForm() {
         setFormData({ email: "", password: "" });
     }
+    // const submitHandler = async (e) => {
+    //     e.preventDefault();
+    //     console.log('Form Data:', formData);
+    //     resetForm();
+    //     toast.success("login Successfully!");
+    //     setIsLoggedIn(true);
+    //     navigate("/dashboard");
+    // }
+
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
-        resetForm();
-        toast.success("login Successfully!");
-        setIsLoggedIn(true);
-        navigate("/dashboard");
-    }
+        try {
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+    
+          const { data } = await axios.post(
+            "http://localhost:4000/api/PlusCare/Home/userLogIn",
+            formData,
+            config
+          );
+        console.log(data);
+          //setUser(data);
+          localStorage.setItem("userInfo", JSON.stringify(data));
+          navigate("/dashboard");
+        } catch (error) {
+          
+        }
+      };
+
+
     return (
         <div className="relative w-[90%] flex md:flex-row flex-col justify-between items-center h-fit">
             {/* Left Part */}

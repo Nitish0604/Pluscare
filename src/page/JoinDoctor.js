@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const JoinDoctor = () => {
 
@@ -21,12 +22,11 @@ const JoinDoctor = () => {
     setFormData({
       name: '',
       email: '',
-      phoneNo: '',
+      contact: '',
       gender: '',
       qualification: '',
       address: '',
       description: '',
-      yearsOfExperience: '',
     });
   }
 
@@ -34,12 +34,36 @@ const JoinDoctor = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData); // Submit data here (e.g., API call)
-    resetForm();
-    toast.success("Thanks for Showing Interest!!");
-    navigate("/");
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(formData); // Submit data here (e.g., API call)
+  //   resetForm();
+  //   toast.success("Thanks for Showing Interest!!");
+  //   navigate("/");
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const data = await axios.post(
+        "http://localhost:4000/api/PlusCare/Home/newDoctor",
+        formData
+        ,
+        config
+      );
+      console.log(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
+
+      navigate("/");
+    } catch (error) {
+
+
+    }
   };
 
   return (
@@ -91,13 +115,13 @@ const JoinDoctor = () => {
               {/* phone and gender */}
               <div className=' w-full flex h-[33%] justify-around '>
                 <div className='flex flex-col items-start w-[50%]'>
-                  <label htmlFor="phoneNo">Phone Number:</label>
+                  <label htmlFor="contact">Phone Number:</label>
                   <input
                     className=" border-b-2 border-b-darkGreen w-[90%] h-[50px] p-2"
                     type="number"
-                    id="phoneNo"
-                    name="phoneNo"
-                    value={formData.phoneNo}
+                    id="contact"
+                    name="contact"
+                    value={formData.contact}
                     onChange={handleChange}
                     required
                   />
@@ -129,7 +153,7 @@ const JoinDoctor = () => {
                   />
                 </div>
 
-                <div className='flex flex-col items-start w-[50%]'>
+                {/* <div className='flex flex-col items-start w-[50%]'>
                   <label htmlFor="yearsOfExperience">YRS EXP:</label>
                   <input
                     type="number"
@@ -140,7 +164,7 @@ const JoinDoctor = () => {
                     onChange={handleChange}
                     required
                   />
-                </div>
+                </div> */}
               </div >
             </div>
 
