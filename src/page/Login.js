@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
 
     const [Doctor, setDoctor] = useState(false);
     const [Patient, setPatient] = useState(true);
@@ -156,7 +156,7 @@ const Login = () => {
             console.log(error);
         }
         setTimeout(() => {
-            
+            setIsLoggedIn(true);
             navigate("/dashboard");
         }, 20000);
 

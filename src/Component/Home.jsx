@@ -4,11 +4,13 @@ import { BsMenuButtonWideFill, BsPeopleFill, BsFillBellFill }
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
 import axios from 'axios';
+import { toast } from "react-hot-toast";
 
 function Home({ patient, doctor, dashboard }) {
 
     const [allSubscriber, setAllSubscriber] = useState([]);
     const [allDoctor, setAllDoctor] = useState([]);
+    const [verify, setVerify] = useState(false);
 
 
     const getAllSubscriber = async () => {
@@ -59,7 +61,7 @@ function Home({ patient, doctor, dashboard }) {
         getAllDoctor();
         // console.log("allSubscriber", allSubscriber);
         // console.log("allSubscriber", allDoctor);
-    }, []);
+    }, [allDoctor]);
 
     const data = [
         {
@@ -105,6 +107,77 @@ function Home({ patient, doctor, dashboard }) {
             amt: 2100,
         },
     ];
+
+
+    const [formData, setFormData] = useState({
+        doctorId: '',
+        userId: ''
+    });
+
+    const changeHandler = (event) => {
+        // formData.doctorId=event.id;
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
+
+
+    const verifyHandler = async (id ) => {
+        try {
+            // Your API endpoint URL
+            console.log(id);
+            const apiUrl = `http://localhost:4000/api/PlusCare/Home/doctorVerified/${id}`;
+
+            // Your POST request using Axios
+            const response = await axios.post(apiUrl);
+
+            // Handle the response as needed
+            console.log(response.data);
+
+            // Additional actions after successful response
+        } catch (error) {
+            // Handle errors
+            console.error('Error:', error.message);
+            // Additional error handling if needed
+        }
+
+
+    }
+
+    const unVerifyHandler = async (id ) => {
+        try {
+            // Your API endpoint URL
+            console.log(id);
+            const apiUrl = `http://localhost:4000/api/PlusCare/Home/delDocById/${id}`;
+
+            // Your POST request using Axios
+            const response = await axios.delete(apiUrl);
+
+            // Handle the response as needed
+            console.log(response.data);
+
+            // Additional actions after successful response
+        } catch (error) {
+            // Handle errors
+            console.error('Error:', error.message);
+            // Additional error handling if needed
+        }
+
+
+    }
+
+    const handleVerification = (doctorId) => {
+        setVerify(true);
+        toast.success('Doctor Verified');
+        verifyHandler(doctorId);
+        console.log(doctorId);
+    };
+
+    
+    const handleUnverification = (doctorId) => {
+        // Implement unverification logic here
+        unVerifyHandler(doctorId);
+        console.log('Unverified:', doctorId);
+      };
+
     return (
 
         <>
@@ -209,16 +282,16 @@ function Home({ patient, doctor, dashboard }) {
                     </div>
                     <div className='bg-midBlue rounded-md'>
 
-                    {allSubscriber.map((subscriber,index) => (
-                        <div key={subscriber.id} className='flex justify-around hover:bg-[#ffff] cursor-pointer'>
-                            <p className='w-[5%] text-gray-800 py-[1rem] text-center '>{index+1}</p>
-                            <p className='w-[20%] text-gray-800 py-[1rem] text-center'>{subscriber.guardianName}</p>
-                            <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{subscriber.childName}</p>
-                            <p className='w-[10%] text-gray-800  py-[1rem] text-center'>{subscriber.gender}</p>
-                            <p className='w-[30%] text-gray-800  py-[1rem] text-center'>{subscriber.email}</p>
-                            <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{subscriber.contact}</p>
-                        </div>
-                    ))}
+                        {allSubscriber.map((subscriber, index) => (
+                            <div key={subscriber._id} className='flex justify-around hover:bg-[#ffff] cursor-pointer'>
+                                <p className='w-[5%] text-gray-800 py-[1rem] text-center '>{index + 1}</p>
+                                <p className='w-[20%] text-gray-800 py-[1rem] text-center'>{subscriber.guardianName}</p>
+                                <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{subscriber.childName}</p>
+                                <p className='w-[10%] text-gray-800  py-[1rem] text-center'>{subscriber.gender}</p>
+                                <p className='w-[30%] text-gray-800  py-[1rem] text-center'>{subscriber.email}</p>
+                                <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{subscriber.contact}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             }
@@ -228,30 +301,57 @@ function Home({ patient, doctor, dashboard }) {
                     <p className='w-full text-center text-black text-[2.6rem] uppercase font-semibold'>List of Doctor</p>
                     <div className='w-full flex justify-around text-[1.3rem] '>
                         <p className='w-[5%] text-gray-600 font-mono p-[1rem] text-center'>Sno:</p>
-                        <p className='w-[20%] text-gray-600 font-mono py-[1rem] text-center'>Name</p>
-                        <p className='w-[20%] text-gray-600 font-mono py-[1rem] text-center'>Qualification</p>
-                        <p className='w-[10%] text-gray-600 font-mono py-[1rem] text-center'>Gender</p>
-                        <p className='w-[30%] text-gray-600 font-mono py-[1rem] text-center'>Email</p>
+                        <p className='w-[15%] text-gray-600 font-mono py-[1rem] text-center'>Name</p>
+                        <p className='w-[15%] text-gray-600 font-mono py-[1rem] text-center'>Qualification</p>
+                        <p className='w-[5%] text-gray-600 font-mono py-[1rem] text-center'>Gender</p>
+                        <p className='w-[20%] text-gray-600 font-mono py-[1rem] text-center'>Email</p>
                         <p className='w-[20%] text-gray-600 font-mono py-[1rem] text-center'>Contact</p>
+                        <p className='w-[20%] text-gray-600 font-mono py-[1rem] text-center'>Button</p>
                     </div>
                     <div className='bg-midBlue rounded-md'>
 
-                    {allDoctor.map((doctor,index) => (
-                        <div key={doctor.id} className='flex justify-around hover:bg-[#ffff] cursor-pointer'>
-                            <p className='w-[5%] text-gray-800 py-[1rem] text-center '>{index+1}</p>
-                            <p className='w-[20%] text-gray-800 py-[1rem] text-center'>{doctor.name}</p>
-                            <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{doctor.qualification}</p>
-                            <p className='w-[10%] text-gray-800  py-[1rem] text-center'>{doctor.gender}</p>
-                            <p className='w-[30%] text-gray-800  py-[1rem] text-center text-wrap'>{doctor.email}</p>
-                            <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{doctor.contact}</p>
-                            
-                        </div>
-                    ))}
+                        {allDoctor.map((doctor, index) => (
+                            <div key={doctor._id} className='flex justify-around  cursor-pointer'>
+                                <p className='w-[5%] text-gray-800 py-[1rem] text-center '>{index + 1}</p>
+                                <p className='w-[15%] text-gray-800 py-[1rem] text-center'>{doctor.name}</p>
+                                <p className='w-[15%] text-gray-800  py-[1rem] text-center'>{doctor.qualification}</p>
+                                <p className='w-[5%] text-gray-800  py-[1rem] text-center'>{doctor.gender}</p>
+                                <p className='w-[20%] text-gray-800  py-[1rem] text-center text-wrap'>{doctor.email}</p>
+                                <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{doctor.phoneNo}</p>
+
+
+                                {
+                                    verify ?
+                                        (<div className='w-[20%] text-black flex gap-2 justify-center items-center'>
+                                            <input
+                                                type='text'
+                                                name='userId'
+                                                value={formData.userId}
+                                                onChange={changeHandler}
+                                                className='pl-1 h-[3rem]' />
+                                            <button onClick={() => {
+                                                formData.doctorId = doctor._id;
+                                                console.log(formData);
+                                            }}
+                                                className='bg-darkGreen px-3 py-2 rounded-md'
+                                            >ok</button>
+                                        </div>)
+                                        : (<div className='w-[20%] text-black flex gap-2 justify-center items-center'>
+                                            <button onClick={() => handleVerification(doctor._id)} className='bg-white px-6 py-2 rounded-md' >Verified</button>
+                                            <button 
+                                            onClick={() => handleUnverification(doctor._id)}
+                                            className='bg-white px-6 py-2 rounded-md'>UnVerified</button>
+                                        </div>)
+
+                                }
+
+                            </div>
+                        ))}
                     </div>
                 </div>
             }
 
-           
+
 
         </>
 

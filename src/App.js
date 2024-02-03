@@ -36,7 +36,7 @@ function App() {
         <Route path="symptoms" element={<Symptoms />} />
         <Route path="blogs" element={<Blogs />} />
 
-        <Route path="login" element={<Login/>} />
+        <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />
 

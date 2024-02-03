@@ -18,18 +18,6 @@ const JoinDoctor = () => {
     yearsOfExperience: '',
   });
 
-  function resetForm() {
-    setFormData({
-      name: '',
-      email: '',
-      phoneNo: '',
-      gender: '',
-      qualification: '',
-      address: '',
-      description: '',
-      yearsOfExperience: '',
-    });
-  }
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -50,20 +38,15 @@ const JoinDoctor = () => {
         config
       );
       console.log(data);
-      if (data.success) {
-        // Display success notification
-        toast.success("Sign Up successfully!");
+      
+      // localStorage.setItem("userInfo", JSON.stringify(data));
 
-        // setUser(data);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-
-      navigate("/");
-    } 
+    navigate("/");
     
     } catch (error) {
       toast.error("An error occurred");
     }
-    resetForm();
+    // resetForm();
   };
 
   return (
