@@ -6,7 +6,7 @@ const {doctorSignUpEmail} = require("../mailTemplate/doctorSignUpEmail");
 
 exports.newDoctor = async(req,res) => {
     try{
-        const {name,email,contact,qualification,gender,address,description} = req.body;
+        const {name,email,phoneNo,yearsOfExperience,qualification,gender,address,description} = req.body;
 
         const existingDoctor = await Doctor.findOne({ email });
         if (existingDoctor) {
@@ -32,7 +32,7 @@ exports.newDoctor = async(req,res) => {
 
         
         const doctor = new Doctor({
-            name,email,contact,qualification,gender,address,description,password:hashPassword
+            name,email,phoneNo,qualification,gender,yearsOfExperience,address,description,password:hashPassword
         });
 
         const newDoctor = await doctor.save();
@@ -49,6 +49,38 @@ exports.newDoctor = async(req,res) => {
             error: "Error while sending doctor info",
             
         });
+    }
+}
+
+
+exports.getDoctorById = async(req,res) => {
+    try{
+        const {id} = req.params;
+        const val = await Doctor.findById({_id : id})
+        
+        if(!val){
+            res.status(404)
+            .json({
+                seccess:false,
+                message:"Doctor not found"
+            });
+        }
+        else{
+            res.status(200)
+            .json({
+                success:true,
+                data:val,
+                message:"Doctor data fetched by id"
+            });
+        }
+    }
+    catch(err){
+        console.error(err),
+        res.status(500).json({
+            success:false,
+            data:"internal server error",
+            message:err.message,
+        })
     }
 }
 
