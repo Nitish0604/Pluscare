@@ -20,6 +20,7 @@ exports.newDoctor = async(req,res) => {
         
         const doctor = new Doctor({
             name,email,phoneNo,qualification,gender,yearsOfExperience,address,description
+
         });
 
         const newDoctor = await doctor.save();
@@ -89,6 +90,7 @@ exports.getAllDoctor = async(req,res) => {
         });
     }
 }
+
 
 exports.delDocById = async(req,res) => {
     try{

@@ -12,7 +12,11 @@ const doctorSchema = new mongoose.Schema({
     },
     qualification: {
         type: String,
-        required: true,
+        //required: true,
+    },
+    yearsOfExperience: {
+        type: String,
+        //required: true,
     },
     gender: {
         type: String,

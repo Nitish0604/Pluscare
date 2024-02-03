@@ -22,25 +22,18 @@ const JoinDoctor = () => {
     setFormData({
       name: '',
       email: '',
-      contact: '',
+      phoneNo: '',
       gender: '',
       qualification: '',
       address: '',
       description: '',
+      yearsOfExperience: '',
     });
   }
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(formData); // Submit data here (e.g., API call)
-  //   resetForm();
-  //   toast.success("Thanks for Showing Interest!!");
-  //   navigate("/");
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +57,7 @@ const JoinDoctor = () => {
 
 
     }
+    resetForm();
   };
 
   return (
@@ -115,13 +109,13 @@ const JoinDoctor = () => {
               {/* phone and gender */}
               <div className=' w-full flex h-[33%] justify-around '>
                 <div className='flex flex-col items-start w-[50%]'>
-                  <label htmlFor="contact">Phone Number:</label>
+                  <label htmlFor="phoneNo">Phone Number:</label>
                   <input
                     className=" border-b-2 border-b-darkGreen w-[90%] h-[50px] p-2"
                     type="number"
-                    id="contact"
-                    name="contact"
-                    value={formData.contact}
+                    id="phoneNo"
+                    name="phoneNo"
+                    value={formData.phoneNo}
                     onChange={handleChange}
                     required
                   />
@@ -153,10 +147,10 @@ const JoinDoctor = () => {
                   />
                 </div>
 
-                {/* <div className='flex flex-col items-start w-[50%]'>
+                <div className='flex flex-col items-start w-[50%]'>
                   <label htmlFor="yearsOfExperience">YRS EXP:</label>
                   <input
-                    type="number"
+                    type="text"
                     className=" border-b-2 border-b-darkGreen w-[90%] h-[50px] p-2"
                     id="yearsOfExperience"
                     name="yearsOfExperience"
@@ -164,7 +158,7 @@ const JoinDoctor = () => {
                     onChange={handleChange}
                     required
                   />
-                </div> */}
+                </div>
               </div >
             </div>
 

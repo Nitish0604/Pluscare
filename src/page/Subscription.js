@@ -215,27 +215,6 @@ const Subscription = () => {
         </div>
       </div>
 
-      {/* subscription */}
-
-
-
-      {
-        // visible &&
-        //   <div className='w-[60%] mx-auto mb-[2rem] flex-col flex gap-[1rem]'>
-        //     <p className='text-[2.5rem] uppercase text-center font-semibold  pt-2 mx-auto mb-[2rem]'>Your <span className='text-darkGreen'>Subscription's</span> Details</p>
-        //     <div className='flex justify-between'>
-        //       <p className='text-darkGreen text-[1.4rem]'>ParentName:<span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.name}</span></p>
-        //       <p className='text-darkGreen text-[1.4rem]'>ChildName:
-        //         <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>{formData.childName}</span></p>
-        //     </div>
-        //     <p className='text-darkGreen text-[1.4rem]'>Your Email:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.email}</span></p>
-        //     <p className='text-darkGreen text-[1.4rem]'>Phone No:<span className='ml-[1rem] text-black text-[1.2rem]'>{formData.phoneNo}</span></p>
-        //     <p className='text-darkGreen text-[1.4rem]'>Your Total Amount: <span className='ml-[1rem] text-black text-[1.2rem] capitalize'>₹2000/-</span></p>
-        //     <button onClick={clickHandler} className='bg-blue w-[40%] h-[50px] text-white rounded-xl relative left-[50%] translate-x-[-50%] 
-        // mt-[1rem]'>Purchase</button>
-        //   </div>
-      }
-
 
     </div>
 
