@@ -66,7 +66,7 @@ exports.capturePayment = async(req,res) => {
 
     try{
        
-        const paymantResponse = await razorpay.orders.create(options);
+        const paymentResponse = await razorpay.orders.create(options);
         console.log(paymentResponse);
         return res.status(200).json({
              success: true,
@@ -120,23 +120,23 @@ exports.verifySignature = async (req,res) => {
             console.log(buyedPackage);
 
             //find the user & add the package
-            const buyerUser = await Subscriber.findOneAndUpdate(
+            const packageBuyer = await Subscriber.findOneAndUpdate(
                                     {_id: userId},
                                     {$push: {packages: packageId}},
                                     {new: true},
 );
 
-            if(!buyerUser){
+            if(!packageBuyer){
             return res.status(500).json({
             success:false,
             message: "Package not found",
             });
             }
-            console.log(buyerUser);
+            console.log(packageBuyer);
 
             //mail send krna h  
             const emailResponse = await mailSender(
-                        buyerUser.email,
+                        packageBuyer.email,
                         "Congratulations from PlusCare",
                         "Congratulations,you are now member of plusCare",
             );

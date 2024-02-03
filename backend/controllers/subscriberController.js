@@ -35,6 +35,46 @@ const newSubscriber = async (req, res) => {
 }
 
 
+const getSubscriberById = async(req,res) => {
+    try{
+        const {id} = req.params;
+        const val = await Subscriber.findById({_id : id})
+        .populate(
+            {
+                path: "vaccines",
+                populate: {
+                    path: "doctor",
+                    select: '_id name',
+                },
+            }
+        ).exec();
+
+        if(!val){
+            res.status(404)
+            .json({
+                seccess:false,
+                message:"Subscriber not found"
+            });
+        }
+        else{
+            res.status(200)
+            .json({
+                success:true,
+                data:val,
+                message:"Subscriber data fetched by id"
+            });
+        }
+    }
+    catch(err){
+        console.error(err),
+        res.status(500).json({
+            success:false,
+            data:"internal server error",
+            message:err.message,
+        })
+    }
+}
+
 const getAllSubscriber = async (req, res) => {
     try {
 
@@ -62,59 +102,4 @@ const getAllSubscriber = async (req, res) => {
     }
 }
 
-
-// const logIn = async(req,res) => {
-//     try{
-//         const {email,password} = req.body;
-//         if(!email || !password){
-//             return res.status(400).json({
-//                 success:false,
-//                 message:"plz fill all the blockes",
-//             });
-//         }
-
-//         let user = await Subscriber.findOne({email});
-//         if(!user){
-//             return res.status(401).json({
-//                 success:false,
-//                 message:"user is not registered",
-//             });
-//         }
-
-//         const payload = {
-//             email:user.email,
-//             id:user._id,
-//         };
-
-//         if(await bcrypt.compare(password,user.password)){
-//             let token = jwt.sign(payload,process.env.JWT_SECRET); 
-
-//         user = user.toObject();
-//         user.token = token;
-//         user.password = undefined;
-
-//         res.status(200).json({
-//             success:true,
-//             user,
-//             token,
-//             message:"login succesfull",
-//         });
-
-//         }
-//         else{
-//             res.status(403).json({
-//                 success:false,
-//                 messaage:"password Incorrect",
-//             });
-//         }
-
-//     } catch(err) {
-//         console.error(err);
-//         res.status(500).json({
-//             success:false,
-//             message:"login failed",
-//         });
-//     }
-// }
-
-module.exports = { getAllSubscriber, newSubscriber };
+module.exports = { getAllSubscriber,getSubscriberById,newSubscriber };
