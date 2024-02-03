@@ -44,7 +44,7 @@ exports.newDoctor = async(req,res) => {
 exports.getDoctorById = async(req,res) => {
     try{
         const {id} = req.params;
-        const val = await Doctor.findById({_id : id})
+        const val = await Doctor.findById({_id : id}).populate("assignedPatients").exec();
         
         if(!val){
             res.status(404)
@@ -76,7 +76,7 @@ exports.getDoctorById = async(req,res) => {
 exports.getAllDoctor = async(req,res) => {
     try{
 
-        const Doctors = await Doctor.find();
+        const Doctors = await Doctor.find().populate("assignedPatients").exec();
 
         res.json({
             Doctors,

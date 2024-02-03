@@ -58,7 +58,11 @@ const subscriberSchema = new mongoose.Schema({
     packages: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Package",
-    }]
+    }],
+    assignedDoctor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctor",
+    }
 });
 
 module.exports = mongoose.model("Subscriber",subscriberSchema);
