@@ -10,6 +10,8 @@ import { toast } from "react-hot-toast";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { GiLoveInjection } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const DashBoard = (props) => {
   let setIsLoggedIn = props.setIsLoggedIn;
@@ -79,6 +81,27 @@ const DashBoard = (props) => {
   const user = JSON.parse(localStorage.getItem("userInfo")) || {};
   const navigate = useNavigate();
   console.log(user);
+
+  const userId = user.user._id; // Replace this with your actual user ID
+  const [subscriber, setSubscriber] = useState(null);
+
+  useEffect(() => {
+    const fetchSubscriber = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/PlusCare/Home/subscriberById/${userId}`);
+        
+        // Axios automatically checks for response.ok
+        const data = response.data;
+        setSubscriber(data);
+        console.log('Fetched Subscriber:', data);
+      } catch (error) {
+        console.error('Error fetching subscriber:', error.message);
+      }
+    };
+
+    fetchSubscriber();
+  }, [userId]);
+
   return (
     <div>
       <div className='flex w-full h-screen'>
@@ -151,8 +174,8 @@ const DashBoard = (props) => {
 
           {/* vaccine List */}
           {
-            Vaccine  &&
-              <>
+            Vaccine ?
+            ( <>
                 <div className='w-full '>
                   <p className='text-[1.6rem] pt-4 pb-1 font-bold tracking-tight uppercase text-blue text-center'>List Of Vaccine</p>
                   <div className='w-[10rem] h-1 bg-blue relative left-[50%] translate-x-[-50%]'></div>
@@ -183,7 +206,40 @@ const DashBoard = (props) => {
                     </tbody>
                   </table>
                 </div>
-              </>
+              </>)
+             :(<div>
+                <div className='w-full '>
+                  <p className='text-[1.6rem] pt-4 pb-1 font-bold tracking-tight uppercase text-blue text-center'>List Of Vaccine</p>
+                  <div className='w-[10rem] h-1 bg-blue relative left-[50%] translate-x-[-50%]'></div>
+                </div>
+                <div className='p-4 mt-4 border-2 rounded-md'>
+                  <table className="border-collapse rounded-md  w-full">
+                    <thead className=''>
+                      <tr className='text-gray-600 font-mono '>
+                        <th className="p-[1rem]">Serial No:</th>
+                        <th className="p-[1rem]">Vaccine</th>
+                        <th className="p-[1rem]">Docter Name</th>
+                        <th className="p-[1rem]">Date</th>
+                       
+                      </tr>
+                    </thead>
+
+                    <tbody className='bg-lightBlue'>
+                      {subscriber.data.vaccines.map((item, index) => (
+                        <tr key={index}>
+                          <td className="text-center  p-[1rem]">{index + 1}</td>
+                          <td className="text-center capitalize  p-[1rem]">{item.vaccineName}</td>
+                          <td className=" p-[1rem] capitalize flex justify-center">{item.doctor.name}</td>
+                          <td className="text-center capitalize p-[1rem]">{item.updatedAt}</td>
+
+                          
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+             </div>)
           }
 
 
