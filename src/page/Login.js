@@ -10,6 +10,10 @@ const Login = () => {
 
     const [Doctor, setDoctor] = useState(false);
     const [Patient, setPatient] = useState(true);
+    const [razar, setRazar] = useState(false);
+
+
+    const User = JSON.parse(localStorage.getItem("userInfo")) || {};
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
@@ -25,7 +29,7 @@ const Login = () => {
             }
         })
     }
-        // patient
+    // patient
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -41,17 +45,15 @@ const Login = () => {
                 config
             );
             console.log(data);
-            //setUser(data);
-            // localStorage.setItem("userInfo", JSON.stringify(data));
-            // navigate("/dashboard");
-            // toast.success("Login successful!");
             if (data.success) {
                 // Display success notification
                 toast.success("Login successful!");
 
                 // setUser(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
-                navigate("/dashboard");
+                // navigate("/dashboard");
+                setRazar(true);
+                setPatient(false);
             } else {
                 // Display notification for existing user
                 toast.error("User Not exists!");
@@ -98,10 +100,72 @@ const Login = () => {
         }
     };
 
+    function loadScript(src) {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            }
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    }
+
+
+    const [package_id, setPackage_id] = useState(null);
+    const sid = 672331;
+    const tid = package_id;
+    const clickHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const { data } = await axios.post(
+                "http://localhost:4000/api/PlusCare/Home/initializePayment",
+                { amount: 500 }
+            );
+            const options = {
+                key: "rzp_test_j3uMC3pJNVXJpR",
+                amount: data.amount,
+                currency: data.currency,
+                name: "Service",
+                description: "Test Transaction",
+                order_id: data.id,
+                handler: async (response) => {
+                    try {
+                        const verifyUrl = "http://localhost:4000/api/PlusCare/Home/verifyPayment";
+                        const { data } = await axios.post(verifyUrl, {
+                            ...response,
+                            sid,
+                            tid,
+                        });
+                        console.log(data);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+            };
+            await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+            const rzp1 = new window.Razorpay(options);
+            rzp1.open();
+        } catch (error) {
+            console.log(error);
+        }
+        setTimeout(() => {
+            
+            navigate("/dashboard");
+        }, 20000);
+
+    };
+
     return (
         <div className='w-full h-fit relative'>
 
-            <button className='px-2 z-[2] w-fit absolute right-3 top-3 rounded-md bg-darkGreen'>
+            <div className='px-2 z-[2] w-fit absolute right-3 top-3 rounded-md bg-darkGreen'>
                 <button onClick={() => {
                     setPatient(true);
                     setDoctor(false);
@@ -110,7 +174,7 @@ const Login = () => {
                     setDoctor(true);
                     setPatient(false);
                 }} className='px-3 py-2 bg-white rounded-lg m-2 font-bold'>Doctor</button>
-            </button>
+            </div>
             {
                 Doctor &&
                 <div className="relative w-[90%] flex md:flex-row flex-col justify-between items-center h-fit">
@@ -241,7 +305,32 @@ const Login = () => {
                     </form>
 
 
-                    
+
+                </div>
+            }
+
+            {
+                razar &&
+                <div className='flex items-center flex-col'>
+                    <div className='flex justify-center p-4 gap-[3rem]'>
+                        <div className='text-darkGreen text-[2.4rem] '>Name: <span className='text-black text-[2rem]'>{User.user.childName}</span></div>
+                        <div className='text-darkGreen text-[2.4rem] '>Email: <span className='text-black text-[2rem]'>{User.user.email}</span></div>
+                    </div>
+
+                    <div className='flex justify-center p-4 gap-[3rem]'>
+                        <div className='text-darkGreen text-[2.4rem] '>Pnone No: <span className='text-black text-[2rem]'>{User.user.contact}</span></div>
+                        <select onChange={(e) => {
+                            setPackage_id(e.target.value);
+                        }} className="border-b-2 border-b-darkGreen  p-2" name="package_id" id='package_id' >
+                            <option className='py-1' value="">Select Package</option>
+                            <option value="male">child</option>
+                            <option value="female">female</option>
+                            <option value="other">old man</option>
+                        </select>
+
+                    </div>
+                    <div className='text-darkGreen my-2 text-[2.4rem]'>Your payment is: 500</div>
+                    <button className='px-9 py-3 bg-blue rounded-md' onClick={clickHandler}>Purchase</button>
                 </div>
             }
         </div>

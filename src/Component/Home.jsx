@@ -244,6 +244,7 @@ function Home({ patient, doctor, dashboard }) {
                             <p className='w-[10%] text-gray-800  py-[1rem] text-center'>{doctor.gender}</p>
                             <p className='w-[30%] text-gray-800  py-[1rem] text-center text-wrap'>{doctor.email}</p>
                             <p className='w-[20%] text-gray-800  py-[1rem] text-center'>{doctor.contact}</p>
+                            
                         </div>
                     ))}
                     </div>
