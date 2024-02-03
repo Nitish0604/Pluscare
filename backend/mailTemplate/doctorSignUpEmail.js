@@ -65,8 +65,8 @@ exports.doctorSignUpEmail = () => {
   
   <body>
     <div class="container">
-      <a href="#"><img class="logo" src="https://res.cloudinary.com/dqclqq2jy/image/upload/v1704799159/chat_app/zi0hmoldfzlgql1l65pf.png"
-        alt="PlusCare Logo"></a>
+    <a href="https://imgbb.com/"><img src="https://i.ibb.co/PrhSZg9/logo4.png" 
+    alt="PlusCare logo" border="0"/></a>
       <div class="message">Welcome to the PlusCare</div>
       <div class="body">
         

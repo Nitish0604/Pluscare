@@ -6,6 +6,10 @@ const doctorSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    yearsOfExperience: {
+        type: String,
+        //required: true,
+    },
     qualification: {
         type: String,
         //required: true,
@@ -25,7 +29,6 @@ const doctorSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
     },
     phoneNo: {
         type: Number,

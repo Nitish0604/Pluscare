@@ -26,6 +26,38 @@ exports.newPackage = async(req,res) => {
 }
 
 
+exports.getPackageById = async(req,res) => {
+    try{
+        const {id} = req.params;
+        const val = await Package.findById({_id : id});
+        
+        if(!val){
+            res.status(404)
+            .json({
+                seccess:false,
+                message:"Package not found"
+            });
+        }
+        else{
+            res.status(200)
+            .json({
+                success:true,
+                data:val,
+                message:"Package data fetched by id"
+            });
+        }
+    }
+    catch(err){
+        console.error(err),
+        res.status(500).json({
+            success:false,
+            data:"internal server error",
+            message:err.message,
+        })
+    }
+}
+
+
 exports.getAllPackage = async(req,res) => {
     try{
 

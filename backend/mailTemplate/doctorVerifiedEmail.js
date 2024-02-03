@@ -1,4 +1,4 @@
-exports.subscriptionEmail = (email,otp) => {
+exports.doctorVerifiedEmail = (email,otp) => {
     return `<!DOCTYPE html>
   <html>
   
@@ -70,7 +70,7 @@ exports.subscriptionEmail = (email,otp) => {
       <div class="message">Welcome to the PlusCare</div>
       <div class="body">
         
-        <p>Welcome to PlusCare family</p><br/>
+        <p>Congatulations! you are verified</p><br/>
         <p>Here are your login details:<br/>Username :  ${email} <br/>Password: ${otp}</p>
       
       </div>
