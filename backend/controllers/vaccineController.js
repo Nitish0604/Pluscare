@@ -7,6 +7,7 @@ exports.vaccination = async(req,res) => {
         const doctorId = req.user.id;
         const doctorDetails = await Doctor.findById(doctorId);
 
+        //const patient = req.params;
         const {patient,vaccineName} = req.body;
         const vaccine = new Vaccine({
             patient,doctor:doctorDetails._id,vaccineName
