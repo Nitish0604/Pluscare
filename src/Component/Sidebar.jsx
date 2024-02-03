@@ -3,9 +3,14 @@ import { BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsFillGearFill 
     from 'react-icons/bs'
 
 import logo from '../assets/logo4.png';
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar({ openSidebarToggle, OpenSidebar, setDoctor, setPatient, setDashboard, setIsLoggedIn, setIsMenuOpen }) {
+
+    
+    const navigate = useNavigate();
+
     return (
         <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
             <div className='sidebar-title'>
@@ -52,7 +57,8 @@ function Sidebar({ openSidebarToggle, OpenSidebar, setDoctor, setPatient, setDas
                         onClick={() => {
                             setIsLoggedIn(false);
                             toast.success("Logged Out");
-                            setIsMenuOpen((prev) => !prev);
+                            // setIsMenuOpen((prev) => !prev);
+                            navigate("/");
                         }}>
                         <BsFillGearFill className='icon' />Log Out
                     </button>
