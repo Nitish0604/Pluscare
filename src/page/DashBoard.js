@@ -9,6 +9,7 @@ import logo from "../assets/logo.png";
 import { toast } from "react-hot-toast";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { GiLoveInjection } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 const DashBoard = (props) => {
   let setIsLoggedIn = props.setIsLoggedIn;
@@ -75,6 +76,9 @@ const DashBoard = (props) => {
 
   ]
 
+  const user = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const navigate = useNavigate();
+  console.log(user);
   return (
     <div>
       <div className='flex w-full h-screen'>
@@ -122,6 +126,8 @@ const DashBoard = (props) => {
           <button onClick={() => {
             setIsLoggedIn(false);
             toast.success("Logged Out");
+            localStorage.removeItem("userInfo");  
+            navigate("/");
           }} className='w-full h-[50px] bg-slate-100 mb-1 flex items-center p-4 hover:bg-blue hover:text-white gap-2'>
             <IoIosLogOut />
             <p>Log Out</p>
@@ -130,7 +136,7 @@ const DashBoard = (props) => {
 
         {/* right */}
         <div className='w-[80%] h-full p-[1rem] text-black relative overflow-scroll dashboardScroll'  >
-          <h1 className='text-[2.8rem] font-semibold'>Welcome <span className='text-blue'>Nitish Sah</span>!</h1>
+          <h1 className='text-[2.8rem] font-semibold'>Welcome <span className='text-blue'>{user.user.childName}</span>!</h1>
           <div className='w-[30%] h-[2px] bg-red-600'></div>
           <p className=' capitalize my-2'>how are you feeling today?</p>
 
