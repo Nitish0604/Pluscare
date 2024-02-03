@@ -44,6 +44,10 @@ const doctorSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    assignedPatients: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Subscriber",
+    }]
 
 });
 
