@@ -11,7 +11,7 @@ const Navbar = (props) => {
     let isMenuOpen = props.isMenuOpen;
     let setIsMenuOpen = props.setIsMenuOpen;
     const [isSizeOpen, setIsSizeOpen] = useState(false);
-    
+
     const handleResize = () => {
         // Update the state based on the screen size
         setIsSizeOpen(window.innerWidth >= 768);
@@ -67,13 +67,13 @@ const Navbar = (props) => {
                                     className=' md:border-none border-t-2 w-full text-center'>
                                     {
                                         isSizeOpen ? (<button className="hidden md:block py-[.5rem] md:p-0 button55 text-nowrap">
-                                        Join As Doctor
-                                    </button>) : (<button className="md:hidden py-[.5rem] md:p-0">
-                                        Join As Doctor
-                                    </button>)
+                                            Join As Doctor
+                                        </button>) : (<button className="md:hidden py-[.5rem] md:p-0">
+                                            Join As Doctor
+                                        </button>)
                                     }
-                                    
-                                    
+
+
                                 </Link>
                             }
                             {!isLoggedIn &&
@@ -107,6 +107,7 @@ const Navbar = (props) => {
                                         setIsLoggedIn(false);
                                         toast.success("Logged Out");
                                         setIsMenuOpen((prev) => !prev);
+                                        localStorage.removeItem("userInfo");
                                     }}
                                         className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
                                         Log Out
@@ -122,12 +123,12 @@ const Navbar = (props) => {
                                             className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg button55'>
                                             Dashboard
                                         </button>) : (<button
-                                        className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
-                                        Dashboard
-                                    </button>)
+                                            className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
+                                            Dashboard
+                                        </button>)
                                     }
-                                    
-                                    
+
+
                                 </Link>
                             }
                         </div>

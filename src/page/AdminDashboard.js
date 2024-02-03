@@ -13,6 +13,7 @@ function App({isLoggedIn,setIsLoggedIn}) {
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle)
   }
+
   return (
     <div className='grid-container'>
       <Header OpenSidebar={OpenSidebar}/>
