@@ -50,12 +50,18 @@ const JoinDoctor = () => {
         config
       );
       console.log(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      if (data.success) {
+        // Display success notification
+        toast.success("Sign Up successfully!");
+
+        // setUser(data);
+        localStorage.setItem("userInfo", JSON.stringify(data));
 
       navigate("/");
+    } 
+    
     } catch (error) {
-
-
+      toast.error("An error occurred");
     }
     resetForm();
   };

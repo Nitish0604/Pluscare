@@ -44,12 +44,12 @@ const Subscription = () => {
         config
       );
       console.log(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
+      const user = localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log(user);
       navigate("/");
+
     } catch (error) {
-
-
+      toast.error("An error occurred");
     }
   };
 
