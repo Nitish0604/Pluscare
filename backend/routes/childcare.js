@@ -8,6 +8,7 @@ const {vaccination} = require("../controllers/vaccineController");
 const {newDoctor,getDoctorById,getAllDoctor,delDocById,doctorVerifiedMail} = require("../controllers/doctorController");
 const {newPackage,getPackageById,getAllPackage} = require("../controllers/packageController");
 const {capturePayment,verifySignature} = require("../controllers/payment");
+const {assignDoctorPatient} = require("../controllers/assignController");
 
 
 router.post("/newSubscriber",newSubscriber);
@@ -26,6 +27,7 @@ router.get("/subscriberById/:id",getSubscriberById);
 router.get("/packageById/:id",getPackageById);
 router.delete("/delDocById/:id",delDocById);
 router.post("/doctorVerified/:id",doctorVerifiedMail);
+router.post("/assignDoctorPatient",assignDoctorPatient);
 
 
 
