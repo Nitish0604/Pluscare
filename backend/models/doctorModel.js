@@ -8,7 +8,11 @@ const doctorSchema = new mongoose.Schema({
     },
     qualification: {
         type: String,
-        required: true,
+        //required: true,
+    },
+    yearsOfExperience: {
+        type: String,
+        //required: true,
     },
     gender: {
         type: String,
@@ -23,9 +27,9 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    contact: {
+    phoneNo: {
         type: Number,
-        required: true,
+        //required: true,
     },
     description: {
         type: String,
