@@ -328,7 +328,7 @@ const Login = ({setIsLoggedIn}) => {
                         <div className='text-darkGreen text-[2.4rem] '>Pnone No: <span className='text-black text-[2rem]'>{User.user.contact}</span></div>
                         <select onChange={(e) => {
                             setPackage_id(e.target.value);
-                        }} className="border-b-2 border-b-darkGreen  p-2" name="package_id" id='package_id' >
+                        }} className="border-b-2 border-b-darkGreen  p-2" name="package_id" id='package_id'>
                             <option className='py-1' value="">Select Package</option>
                             <option value="male">child</option>
                             <option value="female">female</option>
