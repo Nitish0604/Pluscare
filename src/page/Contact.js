@@ -34,8 +34,9 @@ const Contact = () => {
 
   
   return (
-    <div className='text-black top-[80px]'>
+    <div className='text-black top-[80px] h-fit '>
       <p className='text-center text-[3rem] text-darkGreen font-semibold uppercase '>Doctor List</p>
+      <div className='flex flex-wrap'>
       {allDoctor.map((doctor) => (
         <div key={doctor._id} className=' text-center rounded-md border-2 w-fit p-2 m-2'>
           <p className='font-bold text-[2rem] text-darkGreen'>{doctor.name}</p>
@@ -50,6 +51,7 @@ const Contact = () => {
           </div>
         </div>
       ))}
+      </div>
 
     </div>
   )
