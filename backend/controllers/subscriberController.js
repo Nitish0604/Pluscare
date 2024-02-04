@@ -7,6 +7,15 @@ const Vaccine = require("../models/vaccineModel")
 const newSubscriber = async (req, res) => {
     try {
         const { guardianName, childName, dob, gender, email, contact, address, dist, state, pin } = req.body;
+
+        const existingSubscriber = await Subscriber.findOne({ email });
+        if (existingSubscriber) {
+            return res.status(400).json({
+                success: false,
+                message: "Subscriber Already Exists",
+            });
+        }
+
         const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
         console.log(otp)
 

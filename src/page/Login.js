@@ -52,8 +52,15 @@ const Login = ({setIsLoggedIn}) => {
                 // setUser(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 // navigate("/dashboard");
-                setRazar(true);
                 setPatient(false);
+                // if(User.user.packages.length==0)
+                // {
+                //     setRazar(true);
+                // }
+                // else{
+                //     navigate('/dashboard');
+                // }
+                setRazar(true);
             } else {
                 // Display notification for existing user
                 toast.error("User Not exists!");

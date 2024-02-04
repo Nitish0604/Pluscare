@@ -115,12 +115,11 @@ function Home({ patient, doctor, dashboard }) {
     });
 
     const changeHandler = (event) => {
-        // formData.doctorId=event.id;
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
 
-    const verifyHandler = async (id ) => {
+    const verifyHandler = async (id) => {
         try {
             // Your API endpoint URL
             console.log(id);
@@ -142,7 +141,7 @@ function Home({ patient, doctor, dashboard }) {
 
     }
 
-    const unVerifyHandler = async (id ) => {
+    const unVerifyHandler = async (id) => {
         try {
             // Your API endpoint URL
             console.log(id);
@@ -171,12 +170,48 @@ function Home({ patient, doctor, dashboard }) {
         console.log(doctorId);
     };
 
-    
+
     const handleUnverification = (doctorId) => {
         // Implement unverification logic here
         unVerifyHandler(doctorId);
         console.log('Unverified:', doctorId);
-      };
+    };
+
+    const assignDoctorPatient = async (id) => {
+        formData.doctorId = id;
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+
+            const { data } = await axios.post(
+                "http://localhost:4000/api/PlusCare/Home/assignDoctorPatient",
+                formData,
+                config
+            );
+            console.log(data);
+            if (data) {
+                // Display success notification
+                toast.success("assign Patient!");
+                // setUser(data);
+                // localStorage.setItem("userInfo", JSON.stringify(data));
+                // navigate("/dashboard");
+                // setRazar(true);
+                // setPatient(false);
+            }
+            // else{
+            //     toast.error('user already assign');
+            //     console.log('user already assign');
+            // }
+        } catch (error) {
+            // toast.error("An error occurred");
+
+            toast.error('Patient already assign');
+        }
+        formData.userId = "";
+    };
 
     return (
 
@@ -329,18 +364,16 @@ function Home({ patient, doctor, dashboard }) {
                                                 value={formData.userId}
                                                 onChange={changeHandler}
                                                 className='pl-1 h-[3rem]' />
-                                            <button onClick={() => {
-                                                formData.doctorId = doctor._id;
-                                                console.log(formData);
-                                            }}
+                                            <button
+                                                onClick={() => assignDoctorPatient(doctor._id)}
                                                 className='bg-darkGreen px-3 py-2 rounded-md'
                                             >ok</button>
                                         </div>)
                                         : (<div className='w-[20%] text-black flex gap-2 justify-center items-center'>
                                             <button onClick={() => handleVerification(doctor._id)} className='bg-white px-6 py-2 rounded-md' >Verified</button>
-                                            <button 
-                                            onClick={() => handleUnverification(doctor._id)}
-                                            className='bg-white px-6 py-2 rounded-md'>UnVerified</button>
+                                            <button
+                                                onClick={() => handleUnverification(doctor._id)}
+                                                className='bg-white px-6 py-2 rounded-md'>UnVerified</button>
                                         </div>)
 
                                 }
