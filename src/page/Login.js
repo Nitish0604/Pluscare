@@ -6,11 +6,20 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+import { IoEyeOffSharp } from "react-icons/io5";
+import { FaEye } from "react-icons/fa6";
+
 const Login = ({setIsLoggedIn,setPatientDoctor}) => {
 
     const [Doctor, setDoctor] = useState(false);
     const [Patient, setPatient] = useState(true);
     const [razar, setRazar] = useState(false);
+
+    const[password,setpassword]=useState(true);
+
+    const eye=()=>{
+        setpassword(!password);
+    }
 
     const User = JSON.parse(localStorage.getItem("userInfo")) || {};
     const navigate = useNavigate();
@@ -224,19 +233,30 @@ const Login = ({setIsLoggedIn,setPatientDoctor}) => {
                                 className='w-full py-[.5rem]'
                                 htmlFor='password'>
                                 <p
-                                    className='text-xl font-medium text-[#020617] pl-[3rem]'
+                                className='text-xl font-medium text-[#020617] pl-[3rem]'
                                 >Password:
                                 </p>
                             </label>
+                            <div className='w-[100%] flex items-center justify-center'>
                             <input
-                                type='password'
+                                type={password ? 'password':'text'}
                                 name='password'
                                 onChange={changeHandler}
                                 value={formData.password}
                                 className='border-none  outline-slate-200 ring-1 p-2 rounded-lg h-14 w-[85%]'
                                 placeholder="Enter The Password"
                                 required
+                                
                             />
+                            <div className='absolute right-14 cursor-pointer' onClick={eye}>
+                                {
+                                    password? <IoEyeOffSharp /> :  <FaEye /> 
+                                }
+                           
+                            </div>
+                            </div>
+                            
+                            
                         </div>
                         <button className=' h-14 w-[85%] ml-3 mt-6 bg-darkGreen border rounded-lg px-5 py-3 flex justify-center items-center text-[#ffffff]  text-base font-semibold tracking-tighter '>
                             Login
@@ -289,19 +309,30 @@ const Login = ({setIsLoggedIn,setPatientDoctor}) => {
                                 className='w-full py-[.5rem]'
                                 htmlFor='password'>
                                 <p
-                                    className='text-xl font-medium text-[#020617] pl-[3rem]'
+                                className='text-xl font-medium text-[#020617] pl-[3rem]'
                                 >Password:
                                 </p>
                             </label>
+                            <div className='w-[100%] flex items-center justify-center'>
                             <input
-                                type='password'
+                                type={password ? 'password':'text'}
                                 name='password'
                                 onChange={changeHandler}
                                 value={formData.password}
                                 className='border-none  outline-slate-200 ring-1 p-2 rounded-lg h-14 w-[85%]'
                                 placeholder="Enter The Password"
                                 required
+                                
                             />
+                            <div className='absolute right-14 cursor-pointer' onClick={eye}>
+                                {
+                                    password? <IoEyeOffSharp /> :  <FaEye /> 
+                                }
+                           
+                            </div>
+                            </div>
+                            
+                            
                         </div>
                         <button className=' h-14 w-[85%] ml-3 mt-6 bg-darkGreen border rounded-lg px-5 py-3 flex justify-center items-center text-[#ffffff]  text-base font-semibold tracking-tighter '>
                             Login
