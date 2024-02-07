@@ -10,12 +10,15 @@ const Navbar = (props) => {
     let setIsLoggedIn = props.setIsLoggedIn;
     let isMenuOpen = props.isMenuOpen;
     let setIsMenuOpen = props.setIsMenuOpen;
+    let patientDoctor = props.patientDoctor;
     const [isSizeOpen, setIsSizeOpen] = useState(false);
 
     const handleResize = () => {
         // Update the state based on the screen size
         setIsSizeOpen(window.innerWidth >= 768);
     };
+
+    
 
     // Add a listener for screen size changes
     useEffect(() => {
@@ -114,22 +117,44 @@ const Navbar = (props) => {
                                     </button>
                                 </Link>
                             }
-                            {isLoggedIn &&
-                                <Link to="/dashboard"
-                                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                                    className=' md:border-none border-t-2 w-full text-center'>
-                                    {
-                                        isSizeOpen ? (<button
-                                            className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg button55'>
-                                            Dashboard
-                                        </button>) : (<button
-                                            className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
-                                            Dashboard
-                                        </button>)
-                                    }
+                            {isLoggedIn ?
+                               (
+                                patientDoctor ? 
+                                ( <Link to="/dashboard"
+                                onClick={() => setIsMenuOpen((prev) => !prev)}
+                                className=' md:border-none border-t-2 w-full text-center'>
+                                {
+                                    isSizeOpen ? (<button
+                                        className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg button55'>
+                                        Dashboard
+                                    </button>) : (<button
+                                        className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
+                                        Dashboard
+                                    </button>)
+                                }
 
 
-                                </Link>
+                            </Link>)
+                                : ( <Link to="/doctordashboard"
+                                onClick={() => setIsMenuOpen((prev) => !prev)}
+                                className=' md:border-none border-t-2 w-full text-center'>
+                                {
+                                    isSizeOpen ? (<button
+                                        className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg button55'>
+                                        Dashboard
+                                    </button>) : (<button
+                                        className='md:px-5 py-[.5rem] md:border-2 md:rounded-lg'>
+                                        Dashboard
+                                    </button>)
+                                }
+
+
+                            </Link>)
+
+                               )
+
+                               :
+                               (<div></div>)
                             }
                         </div>
                     </div>

@@ -24,19 +24,20 @@ import './App.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [patientDoctor, setPatientDoctor] = useState(false);  //check patient or doctor is login
 
   const excludedPaths = ['/dashboard','/AdminDashboard','/doctordashboard'];
   const location = useLocation();
   return (
     <div className="relative">
-      {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+      {!excludedPaths.includes(location.pathname) && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} patientDoctor={patientDoctor}  />}
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="contact" element={<Contact />} />
         <Route path="symptoms" element={<Symptoms />} />
         <Route path="blogs" element={<Blogs />} />
 
-        <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} setPatientDoctor={setPatientDoctor}/>} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="joinDoctor" element={<JoinDoctor />} />
 

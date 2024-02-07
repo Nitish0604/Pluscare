@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-const Login = ({setIsLoggedIn}) => {
+const Login = ({setIsLoggedIn,setPatientDoctor}) => {
 
     const [Doctor, setDoctor] = useState(false);
     const [Patient, setPatient] = useState(true);
     const [razar, setRazar] = useState(false);
-
 
     const User = JSON.parse(localStorage.getItem("userInfo")) || {};
     const navigate = useNavigate();
@@ -46,10 +45,9 @@ const Login = ({setIsLoggedIn}) => {
             );
             console.log(data);
             if (data.success) {
-                // Display success notification
+                
                 toast.success("Login successful!");
 
-                // setUser(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 // navigate("/dashboard");
                 setPatient(false);
@@ -61,8 +59,8 @@ const Login = ({setIsLoggedIn}) => {
                 //     navigate('/dashboard');
                 // }
                 setRazar(true);
+                setPatientDoctor(false);
             } else {
-                // Display notification for existing user
                 toast.error("User Not exists!");
             }
         } catch (error) {
@@ -92,8 +90,10 @@ const Login = ({setIsLoggedIn}) => {
                 toast.success("Login successful!");
 
                 // setUser(data);
+                setIsLoggedIn(true);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 navigate("/doctordashboard");
+                setPatientDoctor(true);
             } else {
                 // Display notification for existing user
                 toast.error("User not exists!");
